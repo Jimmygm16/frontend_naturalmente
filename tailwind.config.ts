@@ -8,11 +8,20 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      fontFamily:{
+        "vietnamPro":[ '"Be Vietnam Pro"', 'sans-serif']
       },
+      colors:{
+        "color1":"#DDFFBB",
+        "color2":"#C7E9B0",
+        "color3":"#B3C99C",
+        "color4":"#A4BC92",
+        "grayDark":"#525252 "
+      },
+      backgroundImage:{
+        "close-menu": "url('/src/sources/icon-close.svg)",
+        "open-menu": "url('/src/sources/icon-hamburguer.svg')"
+      }
     },
   },
   plugins: [],
