@@ -1,18 +1,21 @@
+import Image from "next/image";
 
+import logo from '../../sources/natural-plus.svg'
 
 function Header():JSX.Element {
     return (
-        <header>
-            <nav className="utilidad h-20 flex items-center justify-between">
+        <header className="shadow-lg">
+
+            <nav className="utilidad h-20 flex items-center justify-between mx-5">
                 <a className="w-1/3 max-w[140px]">
-                   {/*  <img src="./images/natural-plus.svg" alt="cargando" className="w-56"> */}
+                    <Image src={logo} alt="cargando" width={1} height={1} className="w-48" />
                 </a>
                 <input type="checkbox" id="menu" className="peer hidden" />
-                <label className="bg-open-menu w-5 h-5 cursor-pointer peer-checked:bg-close-menu transition-all z-50  md:hidden ">
+                <label className="bg-open-menu w-5 h-5 cursor-pointer peer-checked:bg-close-menu transition-all z-50  md:hidden">
                 </label>
         
                 <div className="hidden lg:flex flex-grow justify-center items-center">
-                    <ul className="flex gap-6 font-bold font-mono text-gray-600">
+                    <ul className="flex justify-center gap-6 font-bold font-mono text-gray-600">
                         <li>
                             <a href="#" id="mision-vision-desktop" >Mision y Vision</a>
                         </li>
@@ -53,6 +56,7 @@ function Header():JSX.Element {
                 </div>
         
             </nav>
+
         </header>
     )
 }

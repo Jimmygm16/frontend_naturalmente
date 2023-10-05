@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
+@layer components{
+  .utilidad{
+      @apply w-[90%] mx-auto overflow-hidden max-w-screen-xl;
+  }
+  .btn{
+      @apply bg-color4 text-yellow-50 block py-2 px-4 rounded-full w-max;
+  }
+}
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -17,11 +23,6 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: #DDFFBB;
 }
 
 
