@@ -1,5 +1,4 @@
 import type { Config } from 'tailwindcss'
-
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,10 +7,22 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily:{
+        "vietnamPro":[ '"Be Vietnam Pro"', 'sans-serif']
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        "open-menu": "url('../sources/icon-hamburguer.svg')",
+        "close-menu": "url('../sources/icon-close.svg')"
+      },
+      colors:{
+        "color1":"#DDFFBB",
+        "color2":"#C7E9B0",
+        "color3":"#B3C99C",
+        "color4":"#A4BC92",
+        "grayDark":"#525252 "
       },
     },
   },

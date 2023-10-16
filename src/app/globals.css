@@ -3,12 +3,30 @@
 @tailwind utilities;
 
 
-
-
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+}
+/*
+.bg-open-menu {
+  background-image: url('../sources/icon-hamburguer.svg');
+}
+
+.bg-close-menu {
+  background-image: url('../sources/icon-close.svg');
+}
+*/
+
+
+@layer components{
+  .utilidad{
+      @apply w-[90%] mx-auto overflow-hidden max-w-screen-xl;
+  }
+  .btn{
+      @apply bg-color4 text-yellow-50 block py-2 px-4 rounded-full w-max;
+      
+  }
 }
 
 @media (prefers-color-scheme: dark) {
