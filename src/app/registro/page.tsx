@@ -23,7 +23,7 @@ export default function page() {
     nombres: nombres,
     apellidos: apellidos,
     correo: correo,
-    contrasena: contrasena,
+    contrasena: contrasena
   }
 
   useEffect(() => {
@@ -72,12 +72,17 @@ export default function page() {
       setRegisterMessage("Registro fallido");
     }
     notify();
+    console.log(user);
+    setRegisterMessage("Registro fallido");
   };
 
   return (
     <div className="h-screen flex items-center justify-center">
-      <section className="border border-green-700 grid md:grid lg:grid p-5 mx-auto my-4 max-w-screen-md rounded-md hover:shadow-2xl">
-        <span className =" text-3xl cursor-default">Crear cuenta</span>
+      <section className="border-2 border-green-700 grid md:grid lg:grid p-5 mx-auto my-4 max-w-screen-md rounded-md hover:shadow-2xl">
+        <div className='inline-flex'>
+          <span className =" text-3xl cursor-default mr-3 mt-3">Crear cuenta</span>
+          <img className="w-14" src="https://cdn-icons-png.flaticon.com/128/892/892917.png"/>
+        </div>
         <span className="mb-1 mt-3 text-xs cursor-default font-bold">Nombres</span>
         <input
           className="border  border-green-700 mb-3 rounded-sm px-2 py-1"
