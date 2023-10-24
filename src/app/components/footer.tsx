@@ -2,7 +2,7 @@ import Image from "next/image"
 import instagram from "../../sources/instagram.svg"
 import facebook from "../../sources/facebook.svg"
 import gmail from "../../sources/gmail.svg"
-import twiter from "../../sources/twiter.svg"
+import twiter from "../../sources/twiter.svg" 
 export default function Footer(): JSX.Element {
 
     return (
