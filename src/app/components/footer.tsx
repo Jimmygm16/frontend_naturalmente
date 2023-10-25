@@ -1,3 +1,8 @@
+import Image from "next/image"
+import instagram from "../../sources/instagram.svg"
+import facebook from "../../sources/facebook.svg"
+import gmail from "../../sources/gmail.svg"
+import twiter from "../../sources/twiter.svg" 
 export default function Footer(): JSX.Element {
 
     return (
@@ -17,10 +22,10 @@ export default function Footer(): JSX.Element {
                 </div>
         
                 <div className="flex space-x-4">
-                    <img src="./images/facebook.svg" alt="" className="w-6 h-6" />
-                    <img src="./images/instagram.svg" alt="" className="w-6 h-6" />
-                    <img src="./images/gmail.svg" alt="" className="w-6 h-6" />
-                    <img src="./images/twiter.svg" alt="" className="w-6 h-6" />
+                    <Image src={instagram} alt="" width={20} height={20} className="w-6 h-6" />
+                    <Image src={facebook} alt="" width={20} height={20} className="w-6 h-6" />
+                    <Image src={gmail} alt="" width={20} height={20} className="w-6 h-6" />
+                    <Image src={twiter} alt="" width={20} height={20} className="w-6 h-6" />
                 </div>
             </div>
         </footer>
