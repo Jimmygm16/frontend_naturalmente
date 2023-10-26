@@ -14,8 +14,6 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
         'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        "open-menu": "url('../sources/icon-hamburguer.svg')",
-        "close-menu": "url('../sources/icon-close.svg')"
       },
       colors:{
         "color1":"#DDFFBB",
