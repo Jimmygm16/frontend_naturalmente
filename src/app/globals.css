@@ -8,7 +8,7 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
-/*
+
 .bg-open-menu {
   background-image: url('../sources/icon-hamburguer.svg');
 }
@@ -16,7 +16,7 @@
 .bg-close-menu {
   background-image: url('../sources/icon-close.svg');
 }
-*/
+
 
 
 @layer components{
@@ -38,8 +38,7 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: #DDFFBB;
+
 }
 
 
