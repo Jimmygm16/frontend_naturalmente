@@ -27,7 +27,7 @@
       @apply w-[90%] mx-auto overflow-hidden max-w-screen-xl;
   }
   .btn{
-      @apply bg-color4 text-yellow-50 block py-2 px-4 rounded-full w-max;
+      @apply cursor-pointer bg-color4 text-yellow-50 block py-2 px-4 rounded-full w-max;
       
   }
 }

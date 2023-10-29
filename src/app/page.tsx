@@ -5,7 +5,6 @@ import p2 from "../sources/product2.jpg"
 import p3 from "../sources/product3.jpg"
 import p4 from "../sources/product4.jpg"
 function LandingPage() {
-
     return (
        <>
          <main className="bg-principalColor pb-6 pt-32">
