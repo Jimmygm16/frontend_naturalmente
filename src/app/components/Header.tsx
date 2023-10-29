@@ -4,10 +4,10 @@ import Image from "next/image"
 import icon from "../../sources/natural-plus.svg"
 function Header():JSX.Element {
 	return (
-		<header className="fixed top-0 z-20 w-full bg-white shadow border-b-4 border-gray-600">
+		<header className="fixed top-0 z-[1] w-full bg-gray-200 shadow border-b-4 border-gray-600 rounded-2xl mb-0">
 			<nav className="utilidad h-20 flex items-center justify-between">
 				<a className="w-1/3 max-w[140px]">
-				<Image src={icon} alt="" width={56} height={56}/>
+				<Image src={icon} alt="" width={0} height={0} className="w-44" />
 				</a>
 				<input type="checkbox" id="menu" className="peer hidden" />
 				<label htmlFor="menu" className="bg-open-menu w-5 h-5 cursor-pointer peer-checked:bg-close-menu transition-all z-50  md:hidden ">

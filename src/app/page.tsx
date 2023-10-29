@@ -8,15 +8,15 @@ function LandingPage() {
 
     return (
        <>
-         <main>
-            <section className="mt-32">
+         <main className="bg-principalColor pb-6 pt-32">
+            <section>
                 <h1 className="font-bold text-6xl text-center text-grayDark">¿Quienes somos?</h1>
                 <ul className="grid content-center mt-14  bg-white bg-opacity-60 border border-gray-300 border-opacity-60 shadow-lg rounded-3xl p-4 w-[70%] mx-auto">
                     <li>
                         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea, unde? Molestiae impedit hic eaque. Dolorum, provident dolores illo est aut accusantium obcaecati a vero suscipit quod quo recusandae quasi sequi quam blanditiis fugit maxime ipsa deleniti doloremque temporibus ut. Laudantium suscipit ex, ipsum atque facilis rerum assumenda iure minus eligendi deserunt ipsa! Vitae corrupti voluptas adipisci sunt dignissimos quod, minima omnis consequuntur corporis, maiores, perferendis dicta distinctio! Corporis, laborum facilis aspernatur minus temporibus itaque sint quasi officiis neque labore? Tempora architecto, consequuntur nemo aperiam exercitationem commodi itaque impedit accusantium, cumque officia ab corrupti facere cum. Voluptatibus omnis aliquid laudantium modi?</p>
                     </li>
                     <li >
-                        <Image src={group} alt="" width={0} height={0} className="rounded-3xl w-64 mx-auto shadow-lg mt-6" />
+                        <Image src={group} alt="" width={0} height={0} className="rounded-3xl object-cover w-64 mx-auto shadow-lg mt-6" />
                     </li>
                 </ul>
             </section>
