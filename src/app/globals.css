@@ -18,7 +18,6 @@
 }
 
 
-
 @layer components{
   .utilidad{
       @apply w-[90%] mx-auto overflow-hidden max-w-screen-xl;
@@ -35,10 +34,6 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-}
-
-body {
-
 }
 
 

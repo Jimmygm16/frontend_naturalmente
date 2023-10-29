@@ -1,5 +1,5 @@
 
-
+"use client";
 import Image from "next/image"
 import icon from "../../sources/natural-plus.svg"
 function Header():JSX.Element {
