@@ -53,8 +53,6 @@ export default function page() {
     }
   }, [correo]);
 
-    
-
   const handleRegistrar = () => {
     if (correoValidation && contrasenaValidation) {
         console.log(nombres, apellidos, correo, contrasena);

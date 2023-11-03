@@ -9,7 +9,7 @@ function LandingPage() {
     return (
        <>
          <main>
-            <section className="mt-32">
+            <section className="mt-5" >
                 <h1 className="font-bold text-6xl text-center text-grayDark">¿Quienes somos?</h1>
                 <ul className="grid content-center mt-14  bg-white bg-opacity-60 border border-gray-300 border-opacity-60 shadow-lg rounded-3xl p-4 w-[70%] mx-auto">
                     <li>
