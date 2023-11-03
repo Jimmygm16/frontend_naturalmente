@@ -6,7 +6,7 @@ import validator from 'validator';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function page() {
+export default function RegisterPage() {
   
   const [nombres, setNombres] = useState('');
   const [apellidos, setApellidos] = useState('');
@@ -53,8 +53,6 @@ export default function page() {
         setRegisterMessage("Registro fallido");
     }
   }, [correo]);
-
-    
 
   const handleRegistrar = () => {
     if (correoValidation && contrasenaValidation) {
