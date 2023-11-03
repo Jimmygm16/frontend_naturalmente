@@ -48,7 +48,7 @@ function Header():JSX.Element {
                 </div>
         
                 <div className="hidden lg:flex">
-                    <a href="#" className="btn mr-4 ml-2 shadow-sm shadow-color4/30">Inicio de sesión</a>
+                    <a href="#" className="btn mr-4 ml-2 hover: shadow-sm shadow-color4/30">Inicio de sesión</a>
                     <a href="#" className="btn shadow-sm shadow-color4/30 ">Registrarse</a>
                 </div>
         
