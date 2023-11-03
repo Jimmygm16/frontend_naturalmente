@@ -11,14 +11,17 @@ function Header():JSX.Element {
 
     if(!isInAuth) {
         return (
-            <header className="fixed top-0 z-20 w-full bg-white shadow border-b-4 border-gray-600">
+            <header className="w-full bg-white shadow border-b-2 border-gray-600">
                 <nav className="utilidad h-20 flex items-center justify-between">
-                    <a className="w-1/3 max-w[140px]">
-                    <Image src={icon} alt="" width={0} height={0} className="w-56" />
-                    </a>
-                    <input type="checkbox" id="menu" className="peer hidden" />
-                    <label htmlFor="menu" className="bg-open-menu w-5 h-5 cursor-pointer peer-checked:bg-close-menu transition-all z-50  md:hidden ">
-                    </label>
+                    <div>
+                        <a className="w-1/3 max-w[140px]">
+                            <Image src={icon} alt="" width={0} height={0} className="w-56" />
+                        </a>
+                        <input type="checkbox" id="menu" className="peer hidden" />
+                            <label htmlFor="menu" className="bg-open-menu w-5 h-5 cursor-pointer peer-checked:bg-close-menu transition-all z-50  md:hidden ">
+                        </label>
+                    </div>
+
                     <div className="hidden lg:flex flex-grow justify-center items-center">
                         <ul className="flex gap-6 font-bold font-mono text-gray-600">
                             <li>

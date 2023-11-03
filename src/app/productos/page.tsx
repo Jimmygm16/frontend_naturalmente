@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { getProducts } from "@/services/productos";
 import { Product } from "@/types";
+import ProductCard from "./ProductCard";
 
 export default function ProductsPage(): JSX.Element {
 
@@ -21,16 +22,11 @@ export default function ProductsPage(): JSX.Element {
   }, []);
 
   return (
-    <div className="h-screen mt-36">
+    <div className="h-screen">
         <h1>Productos</h1>
-        <div className="grid grid-cols-3 gap-4">
+        <div className='flex flex-col divide-y-2 divide-solid mx-[7.5%]'>
             {products.map((product) => (
-                <div key={product.id}>
-                    <h2>{product.name}</h2>
-                    <p>{product.description}</p>
-                    <p>{product.category}</p>
-                    <p>{product.price}</p>
-                </div>
+              <ProductCard key={product.id} product={product} />
             ))}
         </div>
     </div>
