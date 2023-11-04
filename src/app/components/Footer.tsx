@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation"
 
 export default function Footer(): JSX.Element {
+    
     const pathname = usePathname();
     const isInAuth = pathname === '/login' || pathname === '/registro';
 

@@ -1,14 +1,20 @@
 type Product = {
   id: number;
-  name: string;
-  description: string;
+  product_name: string;
+  product_description: string;
   price: number;
-  category: number;
-  product_type: number;
   quantity: number;
+  category: {
+    id: number;
+    category_name: string;
+  };
+  product_type: {
+    id: number;
+    product_type_name: string;
+  };
   img: string;
-  created_at: string;
-  updated_at: string;
+  created_at?: string;
+  updated_at?: string;
 };
 
 export type { Product };
