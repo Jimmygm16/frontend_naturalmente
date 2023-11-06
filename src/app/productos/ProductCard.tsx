@@ -11,13 +11,13 @@ export default function ProductCard(props: {product: Product}): JSX.Element {
 
   return (
 
-    <section className="grid grid-cols-3 rounded-lg shadow-md bg-gray-100">
+    <section className="grid grid-cols-4 rounded-lg shadow-md bg-gray-100 hover:cursor-pointer hover:bg-gray-200">
 
       <section className="col-span-1">
 
       </section>
 
-      <section className="p-5 col-span-2">
+      <section className="p-5 col-span-3">
 
         <div className="flex flex-row justify-between">
           <h2 className="text-md font-semibold">{props.product.product_name}</h2>

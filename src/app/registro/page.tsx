@@ -1,16 +1,23 @@
 // Importa los estilos de Tailwind CSS
 "use client";
+
 import 'tailwindcss/tailwind.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import { NewUser } from '@/types';
 import validator from 'validator';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function page() {
-  const [nombres, setNombres] = useState('');
-  const [apellidos, setApellidos] = useState('');
-  const [correo, setCorreo] = useState('');
-  const [contrasena, setContrasena] = useState('');
+export default function RegisterPage() {
+
+  const [newUser, setNewUser] = useState<NewUser>({
+    name: '',
+    lastName: '',
+    email: '',
+    password: ''
+  })
+  
   const [errorMessage, setErrorMessage] = useState('');
   const [emailMessage, setEmailMessage] = useState('');
   const [correoValidation, setCorreoValidation] = useState(false);
@@ -18,58 +25,58 @@ export default function page() {
   const [registerMessage, setRegisterMessage] = useState('Registro exitoso');
   const notify = () => toast(registerMessage, {position: toast.POSITION.TOP_CENTER});
 
-  let user: any = {
-    nombres: nombres,
-    apellidos: apellidos,
-    correo: correo,
-    contrasena: contrasena
+  const handleImputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewUser({
+      ...newUser,
+      [e.target.name]: e.target.value
+    })
+
+    if (e.target.name === 'password') {
+      validatePassword();
+    } else if (e.target.name === 'email') {
+      validateEmail();
+    }
   }
 
-  useEffect(() => {
-    if (validator.isStrongPassword(contrasena, { 
-        minLength: 8, minLowercase: 1, 
-        minUppercase: 1, minNumbers: 1, minSymbols: 1 
-        })) { 
-            setErrorMessage('Contraseña Segura'); 
-            setContrasenaValidation(true);
-            setRegisterMessage("Registro exitoso");
-            console.log(registerMessage);
-        } else { 
-            setErrorMessage('Contraseña insegura'); 
-            setContrasenaValidation(false);
-            setRegisterMessage("Registro fallido");
-        }
-  }), [contrasena];
-  
-  useEffect(() => {
-    if (validator.isEmail(correo)) {
-        setEmailMessage("Gracias");
-        setCorreoValidation(true);
-        setRegisterMessage("Registro exitoso");
-    } else {
-        setEmailMessage("Email inválido");
-        setCorreoValidation(false); 
-        setRegisterMessage("Registro fallido");
+  const validatePassword = () => {
+    if (validator.isStrongPassword(newUser.password, { 
+      minLength: 8,
+      minLowercase: 1, 
+      minUppercase: 1,
+      minNumbers: 1, 
+      minSymbols: 1 
+    })) { 
+      setErrorMessage('Contraseña Segura'); 
+      setContrasenaValidation(true);
+      setRegisterMessage("Registro exitoso");
+      console.log(registerMessage);
+    } else { 
+      setErrorMessage('Contraseña insegura'); 
+      setContrasenaValidation(false);
+      setRegisterMessage("Registro fallido");
     }
-  }, [correo]);
+  }
+
+  const validateEmail = () => {
+    if (validator.isEmail(newUser.email)) {
+      setEmailMessage("Gracias");
+      setCorreoValidation(true);
+      setRegisterMessage("Registro exitoso");
+    } else {
+      setEmailMessage("Email inválido");
+      setCorreoValidation(false); 
+      setRegisterMessage("Registro fallido");
+    }
+  }
 
   const handleRegistrar = () => {
     if (correoValidation && contrasenaValidation) {
-        console.log(nombres, apellidos, correo, contrasena);
-        user['nombres'] = nombres;
-        user['apellidos'] = apellidos;
-        user['correo'] = correo;
-        user['contrasena'] = contrasena;
-        setNombres('');
-        setApellidos('');
-        setCorreo('');
-        setContrasena('');
-        setRegisterMessage("Registro exitoso");
+      setRegisterMessage("Registro exitoso");
     }else{
       setRegisterMessage("Registro fallido");
     }
     notify();
-    console.log(user);
+    console.log(newUser);
     setRegisterMessage("Registro fallido");
   };
 
@@ -84,34 +91,38 @@ export default function page() {
         <input
           className="border  border-green-700 mb-3 rounded-sm px-2 py-1"
           type="text"
-          value={nombres}
+          name='name'
+          value={newUser.name}
           placeholder="nombres"
-          onChange={(e) => setNombres(e.target.value)}
+          onChange={handleImputChange}
         />
         <span className="mb-1 text-xs font-bold cursor-default">Apellidos </span>
         <input
           className="border border-green-700 mb-3 rounded-sm px-2 py-1"
           type="text"
-          value={apellidos}
+          name='lastName'
+          value={newUser.lastName}
           placeholder="apellidos"
-          onChange={(e) => setApellidos(e.target.value)}
+          onChange={handleImputChange}
         />
         <span className="mb-1 text-xs font-bold cursor-default">Correo electrónico</span>
         <input
           className="border border-green-700 rounded-sm px-2 py-1"
-          type="text"
-          value={correo}
+          type='email'
+          name='email'
+          value={newUser.email}
           placeholder="correo"
-          onChange={(e) => setCorreo(e.target.value)}
+          onChange={handleImputChange}
         />
         <span className="text-xs mb-1 cursor-default">{emailMessage}</span>
         <span className="mb-1 text-xs font-bold cursor-default ">Contraseña</span>
         <input
           className="border border-green-700 rounded-sm px-2 py-1"
           type="password"
-          value={contrasena}
+          name='password'
+          value={newUser.password}
           placeholder="********"
-          onChange={(e) => setContrasena(e.target.value)}
+          onChange={handleImputChange}
         />
         <span className="text-xs mb-3 cursor-default">{errorMessage}</span>
         <button className ="bg-transparent hover:bg-[#DDFFBB] rounded-md text-black font-semibold py-2 px-4 border border-green-700"
