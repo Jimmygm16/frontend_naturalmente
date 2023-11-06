@@ -1,6 +1,10 @@
 'use client'
 
 import { usePathname } from "next/navigation"
+import { Image } from "@mui/icons-material";
+import { Instagram } from "@mui/icons-material";
+import { Facebook } from "@mui/icons-material";
+import { Twitter } from "@mui/icons-material";
 
 export default function Footer(): JSX.Element {
     
@@ -26,10 +30,9 @@ export default function Footer(): JSX.Element {
                     </div>
             
                     <div className="flex space-x-4">
-                        <img src="./images/facebook.svg" alt="" className="w-6 h-6" />
-                        <img src="./images/instagram.svg" alt="" className="w-6 h-6" />
-                        <img src="./images/gmail.svg" alt="" className="w-6 h-6" />
-                        <img src="./images/twiter.svg" alt="" className="w-6 h-6" />
+                        <a href="#" className="text-xl"><Instagram/></a>
+                        <a href="#" className="text-xl"><Facebook/></a>
+                        <a href="#" className="text-xl"><Twitter/></a>
                     </div>
                 </div>
             </footer>
