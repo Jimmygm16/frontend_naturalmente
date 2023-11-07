@@ -3,18 +3,14 @@ import Image from "next/image"
 import icon from "../../sources/natural-plus.svg"
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'; 
-
+import Link from "next/link";
 
    
 
 function Header( ):JSX.Element {
 
 	const router = useRouter();
-    const [isOpen, setIsOpen] = useState(false); // Nuevo estado aquí
-
-    const handleClick = () => {
-        router.push("/registro"); 
-    }
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleClickMini = () => {
         router.push("/registro");
@@ -27,10 +23,19 @@ function Header( ):JSX.Element {
     }
 
     const toggleMenu = () => {
-        setIsOpen(!isOpen); // Abre o cierra el menú aquí
+        setIsOpen(!isOpen); // Abre o cierra el menú segun convenga
     }
 	
 
+ 	const contactUs = () => {
+		document.getElementById('idContactanos').scrollIntoView({ behavior: 'smooth' });
+		setIsOpen(false); 
+		
+	}  
+
+
+	 
+	
 
 	return (
         <header className="fixed top-0 z-[1] w-full bg-gray-200 shadow border-b-4 border-gray-600 rounded-2xl mb-0">
@@ -44,13 +49,13 @@ function Header( ):JSX.Element {
 				<div className="hidden lg:flex flex-grow justify-center items-center">
 					<ul className="flex gap-6 font-bold font-mono text-gray-600">
 						<li>
-							<a  id="mision-vision-desktop"  onClick={main}>Mision y Vision</a>
+							<a  id="mision-vision-desktop" className="cursor-pointer" onClick={main}>Mision y Vision</a>
 						</li>
 						<li>
-							<a  id="productos-desktop"onClick={main}>productos</a>
+							<a  id="productos-desktop" className="cursor-pointer" onClick={main}>productos</a>
 						</li>
 						<li>
-							<a  id="contactanos-desktop" onClick={main}>contactanos</a>
+							<a  id="contactanos-desktop" className="cursor-pointer" onClick={contactUs}>contactanos</a>
 						</li>
 					</ul>
 				</div>
@@ -60,16 +65,16 @@ function Header( ):JSX.Element {
 					<ul className="absolute inset-x-0 top-24 p-12 bg-white w-[60%] mx-auto rounded-2xl h-max text-center grid gap-6
 					font-bold font-mono shadow-2xl">
 						<li>
-							<a href="#" id="mision-vision-mobile"onClick={main}>Mision y Vision</a>
+							<a href="#" id="mision-vision-mobile" className="cursor-pointer" onClick={main}>Mision y Vision</a>
 						</li>
 						<li>
-							<a href="#" id="productos-mobile"onClick={main}>productos</a>
+							<a href="#" id="productos-mobile" className="cursor-pointer" onClick={main}>productos</a>
 						</li>
 						<li>
-							<a href="#" id="contactanos-mobile"onClick={main}>contactanos</a>
+							<a id="contactanos-mobile" className="cursor-pointer" onClick={contactUs}>contactanos</a>
 						</li>
 						<li className="lg:hidden">
-							<a href="#" className="btn shadow-sm shadow-color4/30 mx-auto">Inicio de sesión</a>
+							<a  className="btn shadow-sm shadow-color4/30 mx-auto">Inicio de sesión</a>
 						</li>
 						<li className="lg:hidden">
 							<a className="btn shadow-sm shadow-color4/30 mx-auto text-center" onClick={handleClickMini}>Registrarse</a>
@@ -79,7 +84,7 @@ function Header( ):JSX.Element {
 		
 				<div className="hidden lg:flex">
 					<a className="btn mr-4 ml-2 shadow-sm shadow-color4/30">Inicio de sesión</a>
-					<a className="btn shadow-sm shadow-color4/30"  onClick={handleClick} >Registrarse</a>
+					<Link href="/registro" className="btn shadow-sm shadow-color4/30">Registrarse</Link>
 				</div>
 		
 			</nav>
