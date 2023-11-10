@@ -104,7 +104,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="h-screen flex items-center justify-center">
+    <div className="h-screen flex items-center justify-center pt-16">
       <section className="border-2 border-green-700 grid md:grid lg:grid p-5 mx-auto my-4 max-w-screen-md rounded-md hover:shadow-2xl">
         <div className='inline-flex'>
           <span className =" text-3xl cursor-default mr-3 mt-3">Crear cuenta</span>

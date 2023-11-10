@@ -16,6 +16,10 @@
 .bg-close-menu {
   background-image: url('../sources/icon-close.svg');
 }
+.bg-principalColor {
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 255 187 / var(--tw-bg-opacity));
+}
 
 
 @layer components {
@@ -24,7 +28,6 @@
   }
   .btn{
       @apply bg-color4 text-yellow-50 text-xl font-semibold block py-2 px-4 rounded-full min-w-fit;
-      
   }
 }
 
