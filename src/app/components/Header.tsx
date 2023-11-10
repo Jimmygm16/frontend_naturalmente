@@ -1,96 +1,77 @@
 "use client";
-import Image from "next/image"
-import icon from "../../sources/natural-plus.svg"
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'; 
+
+import Image from "next/image";
+import icon from "../../sources/natural-plus.svg";
 import Link from "next/link";
+import { LOGIN_PATH, REGISTER_PATH, HOME_PATH, PRODUCTS_PATH, CART_PATH } from "../consts";
+import { usePathname } from "next/navigation";
 
+function Header(): JSX.Element {
 
-   
+    // const pathname = usePathname();
+    // const isInAuth = pathname == LOGIN_PATH || pathname == REGISTER_PATH;
+    return (
+        <header className="w-full bg-white shadow-lg border-gray-600">
 
-function Header( ):JSX.Element {
+        <nav className="utilidad max-h-fit py-1.5 flex items-center justify-between">
+            <a className="w-1/3 max-w[140px]">
+            <Image src={icon} alt="" width={0} height={0} className="w-56" />
+            </a>
+            <input type="checkbox" id="menu" className="peer hidden" />
+            <label
+            htmlFor="menu"
+            className="bg-open-menu w-5 h-5 cursor-pointer peer-checked:bg-close-menu transition-all z-50  md:hidden "
+            ></label>
 
-	const router = useRouter();
-    const [isOpen, setIsOpen] = useState(false);
+            <section className="flex flex-row gap-10">
 
-    const handleClickMini = () => {
-        router.push("/registro");
-        setIsOpen(false); // Cierra el menú aquí
-    }
+                <div className="hidden lg:flex flex-grow justify-center items-center">
+                    <ul className="flex gap-6 font-semibold text-xl font-mono text-gray-600">
+                        <li>
+                        <Link href={HOME_PATH}>Principal</Link>
+                        </li>
+                        <li>
+                        <Link href={PRODUCTS_PATH}>Productos</Link>
+                        </li>
+                        <li>
+                        <Link href={CART_PATH}>Carrito</Link>
+                        </li>
+                    </ul>
+                </div>
 
-    const main = () => {
-        router.push("/../");
-        setIsOpen(false); // Cierra el menú aquí
-    }
+                <div className="fixed inset-0 bg-gradient-to-b from-color1/70 to-white/70 translate-x-full peer-checked:translate-x-0 transition-transform">
+                    <div className="flex flex-col items-center justify-center h-screen">
+                        <ul className="grid inset-x-0 bg-white w-[85%] px-12 py-6 shadow-2xl mx-auto rounded-2xl text-center gap-4 font-bold">
+                            <li>
+                                <Link href={HOME_PATH}>Principal</Link>
+                            </li>
+                            <li>
+                            <Link href={PRODUCTS_PATH}>Productos</Link>
+                            </li>
+                            <li className="lg:hidden">
+                            <Link href={LOGIN_PATH}>Iniciar sesion</Link>
+                            </li>
+                            <li className="lg:hidden">
+                            <Link href={REGISTER_PATH}>Registrarse</Link>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen); // Abre o cierra el menú segun convenga
-    }
-	
+                <div className="hidden lg:flex gap-3">
+                    <Link href={LOGIN_PATH} className="btn hover:shadow-sm shadow-color4/30">
+                        Iniciar sesion
+                    </Link>
+                    <Link href={REGISTER_PATH} className="btn hover:shadow-sm shadow-color4/30">
+                        Registrarse
+                    </Link>
+                </div>
+            </section>
+            
+        </nav>
 
- 	const contactUs = () => {
-		document.getElementById('idContactanos').scrollIntoView({ behavior: 'smooth' });
-		setIsOpen(false); 
-		
-	}  
-
-
-	 
-	
-
-	return (
-        <header className="fixed top-0 z-[1] w-full bg-gray-200 shadow border-b-4 border-gray-600 rounded-2xl mb-0">
-            <nav className="utilidad h-20 flex items-center justify-between">
-                <a className="w-1/3 max-w[140px]">
-                    <Image src={icon} alt="" width={0} height={0} className="w-44" />
-                </a>
-                <input type="checkbox" id="menu" className="peer/hamburguer hidden" checked={isOpen} onChange={toggleMenu} />
-				<label htmlFor="menu" className="bg-open-menu w-5 h-5 cursor-pointer peer-checked/hamburguer:bg-close-menu transition-all z-50  md:hidden ">
-				</label>
-				<div className="hidden lg:flex flex-grow justify-center items-center">
-					<ul className="flex gap-6 font-bold font-mono text-gray-600">
-						<li>
-							<a  id="mision-vision-desktop" className="cursor-pointer" onClick={main}>Mision y Vision</a>
-						</li>
-						<li>
-							<a  id="productos-desktop" className="cursor-pointer" onClick={main}>productos</a>
-						</li>
-						<li>
-							<a  id="contactanos-desktop" className="cursor-pointer" onClick={contactUs}>contactanos</a>
-						</li>
-					</ul>
-				</div>
-		
-				<div className="fixed inset-0 bg-gradient-to-b from-color1/70 to-white/70 translate-x-full 
-				peer-checked/hamburguer:translate-x-0 transition-transform">
-					<ul className="absolute inset-x-0 top-24 p-12 bg-white w-[60%] mx-auto rounded-2xl h-max text-center grid gap-6
-					font-bold font-mono shadow-2xl">
-						<li>
-							<a href="#" id="mision-vision-mobile" className="cursor-pointer" onClick={main}>Mision y Vision</a>
-						</li>
-						<li>
-							<a href="#" id="productos-mobile" className="cursor-pointer" onClick={main}>productos</a>
-						</li>
-						<li>
-							<a id="contactanos-mobile" className="cursor-pointer" onClick={contactUs}>contactanos</a>
-						</li>
-						<li className="lg:hidden">
-							<a  className="btn shadow-sm shadow-color4/30 mx-auto">Inicio de sesión</a>
-						</li>
-						<li className="lg:hidden">
-							<a className="btn shadow-sm shadow-color4/30 mx-auto text-center" onClick={handleClickMini}>Registrarse</a>
-						</li>
-					</ul>
-				</div>
-		
-				<div className="hidden lg:flex">
-					<a className="btn mr-4 ml-2 shadow-sm shadow-color4/30">Inicio de sesión</a>
-					<Link href="/registro" className="btn shadow-sm shadow-color4/30">Registrarse</Link>
-				</div>
-		
-			</nav>
-		</header>
-	)
+        </header>
+    );
 }
 
 export default Header;
