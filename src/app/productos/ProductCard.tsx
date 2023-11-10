@@ -2,16 +2,24 @@
 
 import { Product } from "@/types";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { showCurrency } from '../../helpers';
 
 export default function ProductCard(props: {product: Product}): JSX.Element {
 
+  const router = useRouter();
+
   const [isInCart, setIsInCart] = useState(true);
+
+  const handleClickCard = () => {
+    router.push(`/productos/${props.product.id}`)
+  }
 
   return (
 
-    <section className="grid grid-cols-4 rounded-lg shadow-md bg-gray-100 hover:cursor-pointer hover:bg-gray-200">
+    <section className="grid grid-cols-4 rounded-lg shadow-md bg-gray-100 hover:cursor-pointer hover:bg-gray-200"
+    onClick={handleClickCard}>
 
       <section className="col-span-1">
 

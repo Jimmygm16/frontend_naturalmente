@@ -1,5 +1,5 @@
 import API from '../API'
-import { NewUser, AuthUser, User } from '@/types'
+import { NewUser, AuthUser, User, Product } from '@/types'
 
 const formatNewUser = (newUser: NewUser) => {
   return {
@@ -22,7 +22,8 @@ export const registerUser = async (newUser: NewUser): Promise<User> => {
 export const loginUser = async (authUser: AuthUser): Promise<AuthUser> => {
   try {
     const response = await API.post('/auth/login', authUser);
-    return response.data.data as AuthUser;
+    console.log(response.headers['set-cookie']);
+    return response.data;
   } catch (error) {
     throw error;
   }
@@ -39,9 +40,32 @@ export const logoutUser = async (): Promise<void> => {
 
 export const getUser = async (): Promise<User> => {
   try {
-    const response = await API.post('/auth/me');
+    const response = await API.post('/auth/profile', null, {
+      withCredentials: true,
+    });
     return response.data.data as User;
   } catch (error) {
+    throw error;
+  }
+}
+
+export const addProductToCart = async ( proudct_id: number, data?: { quantity: number } ): Promise<void> => {
+  try {
+    if(data) {
+      await API.post(`/users/1/products/${proudct_id}`, data);
+    } else {
+      await API.post(`/users/1/products/${proudct_id}`);
+    }
+  } catch(error) {
+    throw error;
+  }
+}
+
+export const getProductsFromCart = async (): Promise<Product[]> => {
+  try {
+    const response = await API.get(`/users/1/products`);
+    return response.data.data as Product[];
+  } catch(error) {
     throw error;
   }
 }

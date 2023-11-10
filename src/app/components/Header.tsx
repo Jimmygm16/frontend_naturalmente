@@ -3,7 +3,7 @@
 import Image from "next/image";
 import icon from "../../sources/natural-plus.svg";
 import Link from "next/link";
-import { LOGIN_PATH, REGISTER_PATH, HOME_PATH, PRODUCTS_PATH } from "../consts";
+import { LOGIN_PATH, REGISTER_PATH, HOME_PATH, PRODUCTS_PATH, CART_PATH } from "../consts";
 import { usePathname } from "next/navigation";
 
 function Header(): JSX.Element {
@@ -32,6 +32,9 @@ function Header(): JSX.Element {
                         </li>
                         <li>
                         <Link href={PRODUCTS_PATH}>Productos</Link>
+                        </li>
+                        <li>
+                        <Link href={CART_PATH}>Carrito</Link>
                         </li>
                     </ul>
                 </div>

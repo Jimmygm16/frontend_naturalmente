@@ -1,7 +1,7 @@
 import { type } from "os";
 
 type Product = {
-  id: number;
+  id?: number;
   product_name: string;
   product_description: string;
   price: number;
