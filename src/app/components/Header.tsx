@@ -39,7 +39,7 @@ function Header( ):JSX.Element {
 	
 
 	return (
-        <header className="fixed top-0 z-[1] w-full bg-gray-200 shadow border-b-4 border-gray-600 rounded-2xl mb-0">
+        <header className="fixed top-0 z-[1] w-full  bg-slate-50 shadow border-b-4 border-gray-600 rounded-2xl mb-0">
             <nav className="utilidad h-20 flex items-center justify-between">
                 <a className="w-1/3 max-w[140px]">
                     <Image src={icon} alt="" width={0} height={0} className="w-44" />
@@ -53,7 +53,7 @@ function Header( ):JSX.Element {
 							<a  id="mision-vision-desktop" className="cursor-pointer" onClick={main}>Mision y Vision</a>
 						</li>
 						<li>
-							<a  id="productos-desktop" className="cursor-pointer" onClick={main}>productos</a>
+							<Link href="products" id="productos-desktop" className="cursor-pointer" onClick={main}>productos</Link>
 						</li>
 						<li>
 							<a  id="contactanos-desktop" className="cursor-pointer" onClick={contactUs}>contactanos</a>
@@ -69,13 +69,13 @@ function Header( ):JSX.Element {
 							<a href="#" id="mision-vision-mobile" className="cursor-pointer" onClick={main}>Mision y Vision</a>
 						</li>
 						<li>
-							<a href="#" id="productos-mobile" className="cursor-pointer" onClick={main}>productos</a>
+							<Link href="/products" id="productos-mobile" className="cursor-pointer" onClick={main}>productos</Link>
 						</li>
 						<li>
 							<a id="contactanos-mobile" className="cursor-pointer" onClick={contactUs}>contactanos</a>
 						</li>
 						<li className="lg:hidden">
-							<a  className="btn shadow-sm shadow-color4/30 mx-auto">Inicio de sesión</a>
+							<Link href="/login"  className="btn shadow-sm shadow-color4/30 mx-auto">Inicio de sesión</Link>
 						</li>
 						<li className="lg:hidden">
 							<a className="btn shadow-sm shadow-color4/30 mx-auto text-center" onClick={handleClickMini}>Registrarse</a>
@@ -84,7 +84,7 @@ function Header( ):JSX.Element {
 				</div>
 		
 				<div className="hidden lg:flex">
-					<a className="btn mr-4 ml-2 shadow-sm shadow-color4/30">Inicio de sesión</a>
+					<Link href="/login" className="btn mr-4 ml-2 shadow-sm shadow-color4/30">Inicio de sesión</Link>
 					<Link href="/registro" className="btn shadow-sm shadow-color4/30">Registrarse</Link>
 				</div>
 		

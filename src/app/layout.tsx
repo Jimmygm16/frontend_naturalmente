@@ -17,7 +17,9 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
     <html lang="en">
       <body>
         <Header />
-        {children}
+        {/* Ajusta este valor según la altura de tu encabezado */}
+          {children}
+        
         <Footer />
       </body>
     </html>

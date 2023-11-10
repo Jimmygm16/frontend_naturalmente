@@ -6,8 +6,9 @@ import gmail from "../../sources/gmail.svg"
 import instagram from "../../sources/instagram.svg"
 export default function Footer(): JSX.Element {
 
+    
     return (
-        <footer className="bg-gray-200 py-8 border-t-4 border-grayDark divide-solid mt-0">
+        <footer className="bg-slate-50 py-8 border-t-4 border-grayDark mt-auto">
             <div className="container mx-auto px-4 flex flex-col md:flex-row md:justify-between">
                 <div className="mb-6 md:mb-0">
                     <h2 id="idContactanos" className="text-xl font-bold mb-4">Contáctanos</h2>
