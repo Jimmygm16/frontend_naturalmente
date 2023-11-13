@@ -1,4 +1,12 @@
-import { type } from "os";
+type Category = {
+  id: number;
+  name: string;
+}
+
+type ProductType = {
+  id: number;
+  name: string;
+}
 
 type Product = {
   id?: number;
@@ -6,14 +14,8 @@ type Product = {
   product_description: string;
   price: number;
   quantity: number;
-  category: {
-    id: number;
-    category_name: string;
-  };
-  product_type: {
-    id: number;
-    product_type_name: string;
-  };
+  category: Category
+  product_type: ProductType
   img: string;
   created_at?: string;
   updated_at?: string;
@@ -42,9 +44,18 @@ type User = {
   updated_at?: string;
 }
 
+type Filters = {
+  searchTerm: string;
+  categories: number[] | null;
+  productTypes: number[] | null;
+};
+
 export type { 
   Product,
   NewUser,
   AuthUser,
-  User
+  User,
+  Category,
+  ProductType,
+  Filters,
 };
