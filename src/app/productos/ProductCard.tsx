@@ -27,8 +27,8 @@ export default function ProductCard(props: {product: Product}): JSX.Element {
 
       <section className="p-5 col-span-3">
 
-        <div className="flex flex-row justify-between">
-          <h2 className="text-md font-semibold">{props.product.product_name}</h2>
+        <div className="flex flex-row justify-between items-center pb-4">
+          <h2 className="text-xl font-semibold">{props.product.product_name}</h2>
           {isInCart &&
             <section className="py-1.5 px-7 bg-[#A4BC92] rounded-xl">
               <ShoppingCartIcon className="text-white" />

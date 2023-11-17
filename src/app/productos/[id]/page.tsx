@@ -22,7 +22,7 @@ export default function SingleProductPage({ params }: { params: { id: string } }
   }, [product])
 
   const handlePrice = (productQuantity: number) => {
-    setPrice(productQuantity * product.price);
+    setPrice(productQuantity * product.price); 
     setQuantity(productQuantity);
   }
 
@@ -30,7 +30,7 @@ export default function SingleProductPage({ params }: { params: { id: string } }
     async function addToCart() {
       try {
         quantity > 1 
-          ? await addProductToCart(product.id as number, { quantity: quantity })
+          ? await addProductToCart(product.id as number, { orderedQuantity: quantity })
           : await addProductToCart(product.id as number)
       } catch (error) {
         throw new Error("Error al agregar al carrito");

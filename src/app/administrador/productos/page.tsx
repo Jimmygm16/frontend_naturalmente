@@ -20,7 +20,7 @@ async function getTypes(){
     return types.data;
 }
 
-export default function page() {
+export default function Page() {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [types, setTypes] = useState([]);

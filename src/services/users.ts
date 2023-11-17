@@ -1,5 +1,5 @@
 import API from '../API'
-import { NewUser, AuthUser, User, Product } from '@/types'
+import { NewUser, AuthUser, User, Product, cartProduct } from '@/types'
 
 const formatNewUser = (newUser: NewUser) => {
   return {
@@ -49,7 +49,7 @@ export const getUser = async (): Promise<User> => {
   }
 }
 
-export const addProductToCart = async ( proudct_id: number, data?: { quantity: number } ): Promise<void> => {
+export const addProductToCart = async ( proudct_id: number, data?: { orderedQuantity: number } ): Promise<void> => {
   try {
     if(data) {
       await API.post(`/users/1/products/${proudct_id}`, data);
@@ -61,10 +61,10 @@ export const addProductToCart = async ( proudct_id: number, data?: { quantity: n
   }
 }
 
-export const getProductsFromCart = async (): Promise<Product[]> => {
+export const getProductsFromCart = async (): Promise<cartProduct[]> => {
   try {
     const response = await API.get(`/users/1/products`);
-    return response.data.data as Product[];
+    return response.data.data as cartProduct[];
   } catch(error) {
     throw error;
   }

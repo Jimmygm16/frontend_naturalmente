@@ -2,20 +2,64 @@
 
 import { useState } from "react";
 import useFetch from "@/hooks/useFetch";
-import { Category, ProductType } from "@/types";
-import Loading from "../components/Loading";
+import { Category, Filters, Product, ProductType } from "@/types";
+import useFilters from "@/hooks/useFilters";
 
-export default function Filters(): JSX.Element {
+type filtersProps = {
+  products: Product[],
+  onFilterProducts: (products: Product[]) => void
+}
+
+export default function Filters(props: filtersProps): JSX.Element {
 
   const [categories, isLoadingCategories] = useFetch("/categories");
   const [productTypes, isLoadingTypes] = useFetch("/types");
+  const [ filterProducts, filters, setFilters ] = useFilters();
 
-  const [searchTerm, setSearchTerm] = useState<string>('');
   const [openSection, setOpenSection] = useState(null);
-
+  
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
   };
+
+  const handleChangeSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters({
+        ...filters, 
+        searchTerm: e.target.value 
+      });
+  }
+
+  const handleAddFilters = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let { name, checked, id } = e.target;
+
+    if(name === 'Categoría') {
+      name = 'categories';
+    } else if (name === 'Tipo de producto') {
+      name = 'productTypes';
+    }
+
+    if (checked) {
+      setFilters({
+        ...filters,
+        [name]: [...(filters[name as keyof Filters] as number[]), parseInt(id)]
+      });
+    } else {
+      setFilters({
+        ...filters,
+        [name]: (filters[name as keyof Filters] as number[]).filter((item) => item !== parseInt(id))
+      });
+    }
+  };
+  
+  
+  const onSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    props.onFilterProducts(filterProducts(props.products))
+  }
+
+  const handleClickFilters = () => {
+    props.onFilterProducts(filterProducts(props.products));
+  }
 
   if (isLoadingCategories || isLoadingTypes) {
     return (
@@ -23,20 +67,21 @@ export default function Filters(): JSX.Element {
     )
   }
 
+
   return (
     <div className="w-full lg:col-span-1 p-4 bg-slate-50 rounded-2xl overflow-auto text-gray-600 mx-auto">
-      <form>
+      <form onSubmit={onSearch}>
         <input
           type="search"
           placeholder="Buscar Productos"
           className="w-full mb-4 p-2 border-gray-300 rounded-2xl"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          value={filters.searchTerm}
+          onChange={handleChangeSearchTerm}
         />
       </form>
       <h1 className="text-xl mb-4 font-bold">Filtros</h1>
       {["Categoría", "Precio", "Tipo de producto", "Cantidad"].map(
-        (section ) => {
+        (section) => {
           let tasks: Category[] | ProductType[] = [];
           switch (section) {
             case "Categoría":
@@ -70,8 +115,9 @@ export default function Filters(): JSX.Element {
                     <li key={task.id} className="flex items-center space-x-2">
                       <input
                         type="checkbox"
-                        id={task.toString()}
-                        name={task.toString()}
+                        id={task.id.toString()}
+                        name={section}
+                        onChange={handleAddFilters}
                       />
                       <label htmlFor={task.name}>{task.name}</label>
                     </li>
@@ -84,7 +130,10 @@ export default function Filters(): JSX.Element {
         }
       )}
 
-      <button className="w-full mt-10 btn">Cargar filtros</button>
+      <button className="w-full mt-10 btn"
+      onClick={handleClickFilters}>
+        Cargar filtros
+      </button>
     </div>
   )
 

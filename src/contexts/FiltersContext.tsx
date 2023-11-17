@@ -1,22 +1,33 @@
 "use client";
 
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import type { Filters } from "@/types";
 
-export const FiltersContext = createContext<Filters>({
-  searchTerm: '',
-  categories: [],
-  productTypes: [],
+export const FiltersContext = createContext<{
+  filters: Filters;
+  setFilters: (filters: Filters) => void;
+}>({
+  filters: {
+    searchTerm: '',
+    categories: [],
+    productTypes: [],
+  },
+  setFilters: () => { },
 });
 
 export function FiltersProvider({ children, }: { children: React.ReactNode}) {
 
+  const [filters, setFilters] = useState<Filters>({
+    searchTerm: '',
+    categories: [],
+    productTypes: [],
+  });
+
   return (
     <FiltersContext.Provider value={
       {
-        searchTerm: '',
-        categories: [],
-        productTypes: [],
+        filters,
+        setFilters
       }
     }>
       {children}

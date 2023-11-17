@@ -14,12 +14,21 @@ type Product = {
   product_description: string;
   price: number;
   quantity: number;
-  category: Category
+  product_category: Category
   product_type: ProductType
   img: string;
   created_at?: string;
   updated_at?: string;
 };
+
+type cartProduct = Product & {
+  pivot: {
+    user_id: number;
+    product_id: number;
+    id: number;
+    orderedQuantity: number;
+  }
+}
 
 type NewUser = {
   name: string;
@@ -46,8 +55,8 @@ type User = {
 
 type Filters = {
   searchTerm: string;
-  categories: number[] | null;
-  productTypes: number[] | null;
+  categories: number[];
+  productTypes: number[];
 };
 
 export type { 
@@ -58,4 +67,5 @@ export type {
   Category,
   ProductType,
   Filters,
+  cartProduct
 };
