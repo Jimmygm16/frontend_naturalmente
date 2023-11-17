@@ -1,34 +1,33 @@
+type Category = {
+  id: number;
+  name: string;
+}
+
+type ProductType = {
+  id: number;
+  name: string;
+}
+
 type Product = {
   id?: number;
   name: string;
   description: string;
   price: number;
   quantity: number;
-  category: {
-    id: number;
-    category_name: string;
-  };
-  product_type: {
-    id: number;
-    product_type_name: string;
-  };
+  product_category: Category
+  product_type: ProductType
   img: string;
   created_at?: string;
   updated_at?: string;
 };
 
-type Category = {
-  id: number;
-  name: string;
-  created_at: string;
-  updated_at: string;
-}
-
-type ProductType = {
-  id: number;
-  name: string;
-  created_at: string;
-  updated_at: string;
+type CartProduct = Product & {
+  pivot: {
+    user_id: number;
+    product_id: number;
+    id: number;
+    orderedQuantity: number;
+  }
 }
 
 type Client = {
@@ -62,6 +61,12 @@ type User = {
   updated_at?: string;
 }
 
+type Filters = {
+  searchTerm: string;
+  categories: number[];
+  productTypes: number[];
+};
+
 export type {
   Product,
   Category,
@@ -69,5 +74,7 @@ export type {
   Client,
   NewUser,
   AuthUser,
-  User
+  User,
+  Filters,
+  CartProduct
 };

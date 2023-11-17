@@ -1,9 +1,9 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import { Product } from '@/types';
-import ProductCrudCard from '@/app/components/ProductCrudCard';
-import FormCrudProduct from '@/app/components/FormCrudProduct';
-import { getProducts } from '@/services/productos';
+"use client";
+import React, { useState, useEffect } from "react";
+import { Product } from "@/types";
+import ProductCrudCard from "@/app/components/ProductCrudCard";
+import FormCrudProduct from "@/app/components/FormCrudProduct";
+import { getProducts } from "@/services/products";
 
 export default function Page() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -26,7 +26,10 @@ export default function Page() {
   // Calcula el índice de inicio y fin de los productos a mostrar en la página actual
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   // Cambia de página
   const paginate = (pageNumber: number) => {
@@ -49,18 +52,24 @@ export default function Page() {
             reloadProducts={reloadProducts}
           />
         ))}
-        <div className="p-4 flex justify-end absolute bottom-9 
-        left-1/2 transform -translate-x-1/2">
-        {[...Array(Math.ceil(products.length / productsPerPage))].map((_, index) => (
-          <button key={index} onClick={() => paginate(index + 1)} 
-          className="border border-black hover:border-green-400 p-1 rounded-xl mr-2">
-            {index + 1}
-          </button>
-        ))}
+        <div
+          className="p-4 flex justify-end absolute bottom-9
+        left-1/2 transform -translate-x-1/2"
+        >
+          {[...Array(Math.ceil(products.length / productsPerPage))].map(
+            (_, index) => (
+              <button
+                key={index}
+                onClick={() => paginate(index + 1)}
+                className="border border-black hover:border-green-400 p-1 rounded-xl mr-2"
+              >
+                {index + 1}
+              </button>
+            )
+          )}
         </div>
       </div>
       <FormCrudProduct reloadProducts={reloadProducts} />
-      
     </section>
   );
 }
