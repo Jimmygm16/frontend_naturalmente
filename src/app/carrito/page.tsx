@@ -1,47 +1,56 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Product } from "@/types";
+import { cartProduct } from "@/types";
+import { useRouter } from "next/navigation";
 import { getProductsFromCart } from "@/services/users";
+import useFetch from "@/hooks/useFetch";
+import CartProductCard from "./components/CartProductCard";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import Loading from "../components/Loading";
 
 export default function CartPage(): JSX.Element {
-
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const fetchedProducts = await getProductsFromCart();
-        setProducts(fetchedProducts);
-      } catch (error) {
-        console.error("Error al obtener productos:", error);
-      }
-    }
-
-    fetchProducts();
-  }, []);
+  const [products, isLoading] = useFetch("/users/1/products") as [
+    cartProduct[],
+    boolean
+  ];
+  const router = useRouter();
 
   return (
-    <section className="h-screen"> 
-      <div className="flex flex-col divide-y-2 gap-3 divide-solid mx-[7.5%]">
-        {products.map((product) => (
-          <div key={product.id} className="flex flex-row justify-between items-center">
-            <div className="flex flex-row gap-3">
-              <div>
-                <h2 className="text-xl font-semibold">{product.product_name}</h2>
-                <p className="text-gray-500">Cantidad: {product.quantity}</p>
-              </div>
-            </div>
-            <div className="flex flex-row gap-3">
-              <p className="text-xl font-semibold">${product.price}</p>
-              <button className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white">
-                X
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
+    <>
+      {isLoading && <Loading />}
+      {
+        <section className="min-h-screen max-h-fit lg:mx-[7.5%] my-[2.5%] grid grid-cols-3">
+          <section className="col-span-2 mx-[1%]">
+            <h2 className="font-light text-2xl py-3 px-4 border-2 border-gray-300 bg-opacity-80 rounded-md shadow-sm">
+              EN TÚ CARRITO
+            </h2>
 
+            <div className="flex flex-col gap-2 my-2">
+              {products &&
+                products.map((product) => (
+                  <CartProductCard key={product.id} product={product} />
+                ))}
+            </div>
+
+            <div className="flex flex-row justify-between my-4">
+              <button
+                className="bg-white border-2 border-gray-300 text-xl text-black rounded-full py-3 px-6"
+                onClick={() => router.push("/productos")}
+              >
+                <ArrowBackIosIcon sx={{ fontSize: 20 }} />
+                Seguir comprando
+              </button>
+
+              <span></span>
+            </div>
+          </section>
+
+          <section className="col-span-1">
+            <div></div>
+          </section>
+        </section>
+      }
+    </>
+  );
 }
