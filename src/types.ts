@@ -1,9 +1,7 @@
-import { type } from "os";
-
 type Product = {
   id?: number;
-  product_name: string;
-  product_description: string;
+  name: string;
+  description: string;
   price: number;
   quantity: number;
   category: {
@@ -18,6 +16,28 @@ type Product = {
   created_at?: string;
   updated_at?: string;
 };
+
+type Category = {
+  id: number;
+  name: string;
+  created_at: string;
+  updated_at: string;
+}
+
+type ProductType = {
+  id: number;
+  name: string;
+  created_at: string;
+  updated_at: string;
+}
+
+type Client = {
+  id: number;
+  name: string;
+  email: string;
+  phone_number: string;
+  status: string;
+}
 
 type NewUser = {
   name: string;
@@ -42,8 +62,11 @@ type User = {
   updated_at?: string;
 }
 
-export type { 
+export type {
   Product,
+  Category,
+  ProductType,
+  Client,
   NewUser,
   AuthUser,
   User
