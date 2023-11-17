@@ -4,11 +4,11 @@ type Product = {
   description: string;
   price: number;
   quantity: number;
-  category: number |{
+  category: {
     id: number;
     category_name: string;
   };
-  product_type: number | {
+  product_type: {
     id: number;
     product_type_name: string;
   };
@@ -39,4 +39,35 @@ type Client = {
   status: string;
 }
 
-export type { Product, Category, ProductType, Client };
+type NewUser = {
+  name: string;
+  lastName?: string;
+  email: string;
+  password: string;
+}
+
+type AuthUser = {
+  email: string;
+  password: string;
+}
+
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  phone_number: string | null;
+  status: string;
+  profile_image: string | null;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export type {
+  Product,
+  Category,
+  ProductType,
+  Client,
+  NewUser,
+  AuthUser,
+  User
+};
