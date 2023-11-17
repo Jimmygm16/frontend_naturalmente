@@ -19,7 +19,7 @@ export default function page() {
 
   return (
     <>
-      <section className="flex flex-row flex-wrap min-h-screen ">
+      <section className="flex flex-row flex-wrap min-h-screen m-8">
         {customers.map((customer: any) => (
           <ClientCard
             key={customer.id}

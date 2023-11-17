@@ -1,5 +1,6 @@
 "use client";
-
+import { useEffect, useState } from "react";
+import { getProducts } from "@/services/products";
 import useFetch from "@/hooks/useFetch";
 import useFilters from "@/hooks/useFilters";
 import { Product } from "@/types";
@@ -9,10 +10,10 @@ import Loading from "../components/Loading";
 import { useState } from "react";
 
 export default function ProductsPage(): JSX.Element {
-
-  const [products, isLoading] = useFetch("/products") as [Product[], boolean];
-   
+  const [products, setProducts] = useState<Product[]>([]);
+  const [products, isLoading] = useFetch("/products") as [Product[], boolean];   
   const [productsToShow, setProductsToShow] = useState< Product[] >(products);
+
 
   const onChangeProducts = (products: Product[]) => {
     setProductsToShow(products);
@@ -37,7 +38,6 @@ export default function ProductsPage(): JSX.Element {
           )) }
         </div>
       </section>}
-
     </section>
   );
 }
