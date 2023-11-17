@@ -10,8 +10,8 @@ type ProductType = {
 
 type Product = {
   id?: number;
-  product_name: string;
-  product_description: string;
+  name: string;
+  description: string;
   price: number;
   quantity: number;
   product_category: Category
@@ -21,13 +21,21 @@ type Product = {
   updated_at?: string;
 };
 
-type cartProduct = Product & {
+type CartProduct = Product & {
   pivot: {
     user_id: number;
     product_id: number;
     id: number;
     orderedQuantity: number;
   }
+}
+
+type Client = {
+  id: number;
+  name: string;
+  email: string;
+  phone_number: string;
+  status: string;
 }
 
 type NewUser = {
@@ -59,13 +67,14 @@ type Filters = {
   productTypes: number[];
 };
 
-export type { 
+export type {
   Product,
+  Category,
+  ProductType,
+  Client,
   NewUser,
   AuthUser,
   User,
-  Category,
-  ProductType,
   Filters,
-  cartProduct
+  CartProduct
 };

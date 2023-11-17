@@ -1,11 +1,11 @@
 import API from '../API'
-import { NewUser, AuthUser, User, Product, cartProduct } from '@/types'
+import { NewUser, AuthUser, User, Product, CartProduct } from '@/types'
 
 const formatNewUser = (newUser: NewUser) => {
   return {
     name: newUser.name + ' ' + newUser.lastName,
     email: newUser.email,
-    password: newUser.password 
+    password: newUser.password
   }
 }
 
@@ -61,10 +61,10 @@ export const addProductToCart = async ( proudct_id: number, data?: { orderedQuan
   }
 }
 
-export const getProductsFromCart = async (): Promise<cartProduct[]> => {
+export const getProductsFromCart = async (): Promise<CartProduct[]> => {
   try {
     const response = await API.get(`/users/1/products`);
-    return response.data.data as cartProduct[];
+    return response.data.data as CartProduct[];
   } catch(error) {
     throw error;
   }

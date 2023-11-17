@@ -33,7 +33,7 @@ export default function CartProductCard(
           className="text-left w-fit text-lg hover:text-color4 hover:cursor-pointer transition-all py-1"
           onClick={() => router.push(`/productos/${props.product.id}`)}
         >
-          {props.product.product_name}
+          {props.product.name}
         </span>
         <span className="text-sm text-orange-500">
           {showCurrency(props.product.price) + " COP"}
