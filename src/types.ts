@@ -14,7 +14,7 @@ type Product = {
   description: string;
   price: number;
   quantity: number;
-  product_category: Category
+  category: Category
   product_type: ProductType
   img: string;
   created_at?: string;

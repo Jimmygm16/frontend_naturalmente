@@ -49,7 +49,7 @@ export const getUser = async (): Promise<User> => {
   }
 }
 
-export const addProductToCart = async ( proudct_id: number, data?: { orderedQuantity: number } ): Promise<void> => {
+export const addProductToCart = async ( proudct_id: number | string, data?: { orderedQuantity: number } ): Promise<void> => {
   try {
     if(data) {
       await API.post(`/users/1/products/${proudct_id}`, data);

@@ -2,13 +2,13 @@
 
 import CartIncrementalbutton from "./CartIncrementalButton";
 import { useRouter } from "next/navigation";
-import { cartProduct } from "@/types";
+import { CartProduct } from "@/types";
 import { useState } from "react";
 import { showCurrency } from "@/helpers";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 type CartProductCardProps = {
-  product: cartProduct;
+  product: CartProduct;
 };
 
 export default function CartProductCard(
