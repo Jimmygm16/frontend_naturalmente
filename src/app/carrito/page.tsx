@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { cartProduct } from "@/types";
+import { CartProduct } from "@/types";
 import { useRouter } from "next/navigation";
-import { getProductsFromCart } from "@/services/users";
 import useFetch from "@/hooks/useFetch";
 import CartProductCard from "./components/CartProductCard";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -11,7 +9,7 @@ import Loading from "../components/Loading";
 
 export default function CartPage(): JSX.Element {
   const [products, isLoading] = useFetch("/users/1/products") as [
-    cartProduct[],
+    CartProduct[],
     boolean
   ];
   const router = useRouter();

@@ -45,12 +45,12 @@ export default function SingleProductPage({
     async function addToCart() {
       try {
         quantity > 1
-          ? await addProductToCart(product.id as number, {
+          ? await addProductToCart(params.id, {
               orderedQuantity: quantity,
             })
-          : await addProductToCart(product.id as number);
+          : await addProductToCart(params.id);
       } catch (error) {
-        throw new Error("Error al agregar al carrito");
+        throw new Error("Error al agregar al carrito" + error);
       }
     }
     addToCart();
