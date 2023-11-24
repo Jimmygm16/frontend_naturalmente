@@ -13,10 +13,9 @@ export default function SingleProductPage({
 }: {
   params: { id: string };
 }): JSX.Element {
-  const [product, isLoading] = useFetch(`/products/${params.id}`) as [
-    Product,
-    boolean
-  ];
+  const [product, isLoading, setProduct] = useFetch(
+    `/products/${params.id}`
+  ) as [Product, boolean, (product: Product) => void];
 
   const [price, setPrice] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(1);

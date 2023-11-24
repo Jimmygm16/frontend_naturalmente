@@ -5,10 +5,11 @@ import { useRouter } from "next/navigation";
 import { CartProduct } from "@/types";
 import { useState } from "react";
 import { showCurrency } from "@/helpers";
-import DeleteIcon from "@mui/icons-material/Delete";
+import ModalDettachProduct from "./ModalDettachProduct";
 
 type CartProductCardProps = {
   product: CartProduct;
+  updateProducts: (products: CartProduct[]) => void;
 };
 
 export default function CartProductCard(
@@ -52,9 +53,10 @@ export default function CartProductCard(
         </div>
 
         <div className="flex items-center justify-end">
-          <button className="hover:cursor-pointer hover:text-red-600 transition-colors duration-150">
-            <DeleteIcon sx={{ fontSize: 40 }} />
-          </button>
+          <ModalDettachProduct
+            product={props.product}
+            updateProducts={props.updateProducts}
+          />
         </div>
       </div>
     </section>

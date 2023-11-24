@@ -1,13 +1,11 @@
 "use strict";
 
-import { FiltersProvider } from "@/contexts/FiltersContext"
+import { FiltersProvider } from "@/app/Context/FiltersContext";
 
-export default function ProductsLayout({ children, }: { children: React.ReactNode }) {
-
-  return (
-    <FiltersProvider>
-      {children}
-    </FiltersProvider>
-  )
-
+export default function ProductsLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <FiltersProvider>{children}</FiltersProvider>;
 }
