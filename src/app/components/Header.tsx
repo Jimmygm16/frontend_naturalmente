@@ -3,7 +3,6 @@
 import Image from "next/image";
 import icon from "../../sources/natural-plus.svg";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import {
   LOGIN_PATH,
   REGISTER_PATH,
