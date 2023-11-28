@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import useFetch from "@/hooks/useFetch";
 import { Product } from "@/types";
+import { getSingleProduct } from "@/services/products";
 import { showCurrency } from "@/helpers";
 import { addProductToCart } from "@/services/users";
 import IncrementalButton from "@/app/components/IncrementalButton";
@@ -20,6 +21,13 @@ export default function SingleProductPage({
 
   const { authUser, redirectOnMissingAuth } = useAuth();
 
+
+export default function SingleProductPage({
+  params,
+}: {
+  params: { id: string };
+}): JSX.Element {
+  const [product, setProduct] = useState<Product>();
   const [price, setPrice] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(1);
 
@@ -27,7 +35,8 @@ export default function SingleProductPage({
     if (product) {
       setPrice(product.price as number);
     }
-  }, [product]);
+    fetchProduct();
+  }, [params.id]);
 
   const handlePrice = (productQuantity: number) => {
     setPrice(productQuantity * product.price);
