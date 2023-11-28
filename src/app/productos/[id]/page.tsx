@@ -8,16 +8,18 @@ import { showCurrency } from "@/helpers";
 import { addProductToCart } from "@/services/users";
 import IncrementalButton from "@/app/components/IncrementalButton";
 import Loading from "@/app/components/Loading";
+import { useAuth } from "@/app/Context/AuthContext";
 
 export default function SingleProductPage({
   params,
 }: {
   params: { id: string };
 }): JSX.Element {
-  const [product, isLoading] = useFetch(`/products/${params.id}`) as [
-    Product,
-    boolean
-  ];
+  const [product, isLoading, setProduct] = useFetch(
+    `/products/${params.id}`
+  ) as [Product, boolean, (product: Product) => void];
+
+  const { authUser, redirectOnMissingAuth } = useAuth();
 
 
 export default function SingleProductPage({
@@ -45,15 +47,20 @@ export default function SingleProductPage({
     async function addToCart() {
       try {
         quantity > 1
-          ? await addProductToCart(product.id as number, {
+          ? await addProductToCart(authUser?.id as number, params.id, {
               orderedQuantity: quantity,
             })
-          : await addProductToCart(product.id as number);
+          : await addProductToCart(authUser?.id as number, params.id);
       } catch (error) {
-        throw new Error("Error al agregar al carrito");
+        throw new Error("Error al agregar al carrito" + error);
       }
     }
     addToCart();
+  };
+
+  const handleBuy = () => {
+    console.log("Comprar");
+    redirectOnMissingAuth();
   };
 
   return (
@@ -86,7 +93,9 @@ export default function SingleProductPage({
               <button className="btn w-full" onClick={handleAddToCart}>
                 Agregar al carrito
               </button>
-              <button className="btn w-full bg-orange-300">Comprar</button>
+              <button className="btn w-full bg-orange-300" onClick={handleBuy}>
+                Comprar
+              </button>
             </div>
           </section>
         </section>

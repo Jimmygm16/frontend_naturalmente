@@ -14,7 +14,7 @@ type Product = {
   description: string;
   price: number;
   quantity: number;
-  product_category: Category
+  category: Category
   product_type: ProductType
   img: string;
   created_at?: string;
@@ -30,12 +30,18 @@ type CartProduct = Product & {
   }
 }
 
-type Client = {
+type Customer = {
   id: number;
   name: string;
   email: string;
   phone_number: string;
   status: string;
+  profile_image: string;
+}
+
+type UserType = {
+  id: number;
+  type_name: string;
 }
 
 type NewUser = {
@@ -71,7 +77,7 @@ export type {
   Product,
   Category,
   ProductType,
-  Client,
+  Customer,
   NewUser,
   AuthUser,
   User,

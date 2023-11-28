@@ -1,12 +1,13 @@
 import axios from 'axios';
 
+axios.defaults.withCredentials = true;
+
 const API = axios.create({
   baseURL: 'http://localhost:8000/api/v1',
-  withCredentials: true,
 });
 
 API.interceptors.response.use((response) => {
-  console.log(response.data.data);
+  console.log(response.data);
   return response;
 })
 

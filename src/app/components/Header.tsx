@@ -9,26 +9,28 @@ import {
   HOME_PATH,
   PRODUCTS_PATH,
   CART_PATH,
+  PROFILE_PATH,
 } from "../consts";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/Context/AuthContext";
+import FaceIcon from "@mui/icons-material/Face";
 
 function Header(): JSX.Element {
+  const { isAuth } = useAuth();
   const router = useRouter();
+
   // const pathname = usePathname();
   // const isInAuth = pathname == LOGIN_PATH || pathname == REGISTER_PATH;
   return (
     <header className="w-full bg-white shadow-lg border-gray-600">
       <nav className="utilidad max-h-fit py-1.5 flex items-center justify-between">
-        <a className="w-1/3 max-w[140px]">
+        <a className="w-1/3 max-w[140px] hover:cursor-pointer">
           <Image
             src={icon}
             alt=""
             width={0}
             height={0}
-            className="w-56 cursor-pointer"
-            onClick={() => {
-              router.push(HOME_PATH);
-            }}
+            className="w-56"
+            onClick={() => router.push(HOME_PATH)}
           />
         </a>
         <input type="checkbox" id="menu" className="peer hidden" />
@@ -40,9 +42,6 @@ function Header(): JSX.Element {
         <section className="flex flex-row gap-10">
           <div className="hidden lg:flex flex-grow justify-center items-center">
             <ul className="flex gap-6 font-semibold text-xl font-mono text-gray-600">
-              <li>
-                <Link href={HOME_PATH}>Principal</Link>
-              </li>
               <li>
                 <Link href={PRODUCTS_PATH}>Productos</Link>
               </li>
@@ -61,6 +60,9 @@ function Header(): JSX.Element {
                 <li>
                   <Link href={PRODUCTS_PATH}>Productos</Link>
                 </li>
+                <li>
+                  <Link href={CART_PATH}>Carrito</Link>
+                </li>
                 <li className="lg:hidden">
                   <Link href={LOGIN_PATH}>Iniciar sesion</Link>
                 </li>
@@ -72,18 +74,30 @@ function Header(): JSX.Element {
           </div>
 
           <div className="hidden lg:flex gap-3">
-            <Link
-              href={LOGIN_PATH}
-              className="btn hover:shadow-sm shadow-color4/30"
-            >
-              Iniciar sesion
-            </Link>
-            <Link
-              href={REGISTER_PATH}
-              className="btn hover:shadow-sm shadow-color4/30"
-            >
-              Registrarse
-            </Link>
+            {isAuth ? (
+              <Link
+                href={PROFILE_PATH}
+                className="btn hover:shadow-sm shadow-color4/30"
+              >
+                <FaceIcon />
+                Perfil
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href={LOGIN_PATH}
+                  className="btn hover:shadow-sm shadow-color4/30"
+                >
+                  Iniciar sesión
+                </Link>
+                <Link
+                  href={REGISTER_PATH}
+                  className="btn hover:shadow-sm shadow-color4/30"
+                >
+                  Registrarse
+                </Link>
+              </>
+            )}
           </div>
         </section>
       </nav>
