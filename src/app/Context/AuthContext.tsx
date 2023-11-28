@@ -4,7 +4,7 @@ import { AuthUser, Customer } from "@/types";
 import { useState, useContext, createContext } from "react";
 import { getUser, loginUser, logoutUser } from "@/services/users";
 import { useRouter } from "next/navigation";
-import { validateAccessToken } from "@/services/auth";
+// import { validateAccessToken } from "@/services/auth";
 
 type AuthContextProps = {
   authUser: Customer | null;
@@ -17,7 +17,7 @@ type AuthContextProps = {
 const AuthContext = createContext<AuthContextProps | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  validateAccessToken();
+  // validateAccessToken();
   const router = useRouter();
 
   const [authUser, setAuthUser] = useState<Customer | null>(() => {
