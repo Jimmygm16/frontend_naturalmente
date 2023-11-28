@@ -11,8 +11,9 @@ export default function ClientCard(props: {
   return (
     <>
       <div
-        className="m-4 border-2 border-black rounded-2xl p-4 w-60 h-24 flex flex-row
-                items-center justify-between cursor-pointer hover:shadow-xl bg-blue-300"
+        className="m-8 border border-gray-600 rounded-2xl p-4 w-64 h-28 flex flex-row
+                items-center justify-between cursor-pointer hover:shadow-xl bg-slate-50
+                font-mono"
       >
         <section className="flex flex-col m-2">
           <h1 className="uppercase text-sm font-bold">{props.name}</h1>
