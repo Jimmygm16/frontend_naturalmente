@@ -1,6 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
-import { getProducts } from "@/services/products";
+
 import useFetch from "@/hooks/useFetch";
 import { Product } from "@/types";
 import ProductCard from "../productos/ProductCard";
@@ -9,8 +8,11 @@ import Loading from "../components/Loading";
 import { useState } from "react";
 
 export default function ProductsPage(): JSX.Element {
-  
-  const [products, isLoading] = useFetch("/products") as [Product[], boolean];
+  const [products, isLoading, serProducts] = useFetch("/products") as [
+    Product[],
+    boolean,
+    (products: Product[]) => void
+  ];
   const [productsToShow, setProductsToShow] = useState<Product[]>(products);
 
   const onChangeProducts = (products: Product[]) => {
