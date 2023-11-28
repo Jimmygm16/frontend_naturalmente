@@ -7,6 +7,7 @@ import { showCurrency } from "@/helpers";
 import { addProductToCart } from "@/services/users";
 import IncrementalButton from "@/app/components/IncrementalButton";
 import Loading from "@/app/components/Loading";
+import { useAuth } from "@/app/Context/AuthContext";
 
 export default function SingleProductPage({
   params,
@@ -16,6 +17,8 @@ export default function SingleProductPage({
   const [product, isLoading, setProduct] = useFetch(
     `/products/${params.id}`
   ) as [Product, boolean, (product: Product) => void];
+
+  const { authUser, redirectOnMissingAuth } = useAuth();
 
   const [price, setPrice] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(1);
@@ -35,15 +38,20 @@ export default function SingleProductPage({
     async function addToCart() {
       try {
         quantity > 1
-          ? await addProductToCart(params.id, {
+          ? await addProductToCart(authUser?.id as number, params.id, {
               orderedQuantity: quantity,
             })
-          : await addProductToCart(params.id);
+          : await addProductToCart(authUser?.id as number, params.id);
       } catch (error) {
         throw new Error("Error al agregar al carrito" + error);
       }
     }
     addToCart();
+  };
+
+  const handleBuy = () => {
+    console.log("Comprar");
+    redirectOnMissingAuth();
   };
 
   return (
@@ -76,7 +84,9 @@ export default function SingleProductPage({
               <button className="btn w-full" onClick={handleAddToCart}>
                 Agregar al carrito
               </button>
-              <button className="btn w-full bg-orange-300">Comprar</button>
+              <button className="btn w-full bg-orange-300" onClick={handleBuy}>
+                Comprar
+              </button>
             </div>
           </section>
         </section>

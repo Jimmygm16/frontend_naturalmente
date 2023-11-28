@@ -17,7 +17,6 @@ import FaceIcon from "@mui/icons-material/Face";
 
 function Header(): JSX.Element {
   const { isAuth } = useAuth();
-  console.log(isAuth);
   const router = useRouter();
 
   // const pathname = usePathname();

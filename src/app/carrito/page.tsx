@@ -7,13 +7,14 @@ import CartProductCard from "./components/CartProductCard";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Loading from "../components/Loading";
 import CartSummary from "./components/CartSummary";
+import { useAuth } from "../Context/AuthContext";
 
 export default function CartPage(): JSX.Element {
-  const [products, isLoading, setProducts] = useFetch("/users/1/products") as [
-    CartProduct[],
-    boolean,
-    (products: CartProduct[]) => void
-  ];
+  const { authUser } = useAuth();
+
+  const [products, isLoading, setProducts] = useFetch(
+    `/users/${authUser?.id}/products`
+  ) as [CartProduct[], boolean, (products: CartProduct[]) => void];
 
   const router = useRouter();
 

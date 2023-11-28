@@ -50,21 +50,21 @@ export const getUser = async (): Promise<Customer> => {
   }
 }
 
-export const addProductToCart = async ( proudct_id: number | string, data?: { orderedQuantity: number } ): Promise<void> => {
+export const addProductToCart = async ( user_id: number | string, proudct_id: number | string, data?: { orderedQuantity: number } ): Promise<void> => {
   try {
     if(data) {
-      await API.post(`/users/1/products/${proudct_id}`, data);
+      await API.post(`/users/${user_id}/products/${proudct_id}`, data);
     } else {
-      await API.post(`/users/1/products/${proudct_id}`);
+      await API.post(`/users/${user_id}/products/${proudct_id}`);
     }
   } catch(error) {
     throw error;
   }
 }
 
-export const getProductsFromCart = async (): Promise<CartProduct[]> => {
+export const getProductsFromCart = async (user_id: number): Promise<CartProduct[]> => {
   try {
-    const response = await API.get(`/users/1/products`);
+    const response = await API.get(`/users/${user_id}/products`);
     return response.data.data as CartProduct[];
   } catch(error) {
     throw error;

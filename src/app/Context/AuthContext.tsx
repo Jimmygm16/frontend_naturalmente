@@ -2,41 +2,44 @@
 
 import { AuthUser, Customer } from "@/types";
 import { useState, useContext, createContext } from "react";
+import { getUser, loginUser, logoutUser } from "@/services/users";
 import { useRouter } from "next/navigation";
-import { getUser, loginUser } from "@/services/users";
+import { validateAccessToken } from "@/services/auth";
 
 type AuthContextProps = {
   authUser: Customer | null;
   isAuth: boolean;
   login: (user: AuthUser) => void;
   logout: () => void;
+  redirectOnMissingAuth: () => void;
 };
 
 const AuthContext = createContext<AuthContextProps | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  validateAccessToken();
   const router = useRouter();
 
   const [authUser, setAuthUser] = useState<Customer | null>(() => {
-    const storedUser = sessionStorage.getItem("authUser");
+    const storedUser = localStorage.getItem("authUser");
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
   const [isAuth, setIsAuth] = useState(() => {
-    const storedUser = sessionStorage.getItem("authUser");
-    return storedUser ? true : false;
+    const storedIsAuth = localStorage.getItem("authUser");
+    return storedIsAuth ? true : false;
   });
 
   const setAuthUserSate = (user: Customer | null) => {
     setAuthUser(user);
-    sessionStorage.setItem("authUser", JSON.stringify(user));
+    localStorage.setItem("authUser", JSON.stringify(user));
+    console.log(localStorage.getItem("authUser"));
   };
 
   const login = (user: AuthUser) => {
     async function fetchUser() {
       try {
         await loginUser(user);
-        setIsAuth(true);
       } catch (error) {
         console.error("Error al obtener usuario:", error);
       }
@@ -56,8 +59,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logout = () => {
-    setAuthUser(null);
-    setIsAuth(false);
+    async function logOut() {
+      try {
+        await logoutUser();
+        setAuthUserSate(null);
+        setIsAuth(false);
+        localStorage.removeItem("authUser");
+      } catch (error) {
+        console.error("Error al cerrar sesión:", error);
+      }
+    }
+
+    logOut();
+  };
+
+  const redirectOnMissingAuth = () => {
+    if (!isAuth) {
+      router.push("/login");
+    }
   };
 
   return (
@@ -67,6 +86,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isAuth,
         login,
         logout,
+        redirectOnMissingAuth,
       }}
     >
       {children}
