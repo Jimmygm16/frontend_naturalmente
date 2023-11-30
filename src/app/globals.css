@@ -22,13 +22,12 @@
 }
 
 
-@layer components{
+@layer components {
   .utilidad{
-      @apply w-[90%] mx-auto overflow-hidden max-w-screen-xl;
+      @apply w-[95%] mx-auto overflow-hidden;
   }
   .btn{
-      @apply cursor-pointer bg-color4 text-yellow-50 block py-2 px-4 rounded-full w-max;
-      
+      @apply bg-color4 text-yellow-50 text-xl font-semibold block py-2 px-4 rounded-full min-w-fit;
   }
 }
 

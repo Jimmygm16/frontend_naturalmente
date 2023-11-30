@@ -1,34 +1,43 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getProducts } from "@/services/productos";
+import useFetch from "@/hooks/useFetch";
 import { Product } from "@/types";
-import ProductCard from "./ProductCard";
+import ProductCard from "../productos/ProductCard";
+import Filters from "./Filters";
+import Loading from "../components/Loading";
 
 export default function ProductsPage(): JSX.Element {
+  const [products, isLoading, serProducts] = useFetch("/products") as [
+    Product[],
+    boolean,
+    (products: Product[]) => void
+  ];
+  const [productsToShow, setProductsToShow] = useState<Product[]>(products);
 
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const fetchedProducts = await getProducts();
-        setProducts(fetchedProducts);
-      } catch (error) {
-        console.error("Error al obtener productos:", error);
-      }
-    }
-    fetchProducts();
-  }, []);
+  const onChangeProducts = (products: Product[]) => {
+    setProductsToShow(products);
+  };
 
   return (
-    <div className="h-screen">
-        <h1>Productos</h1>
-        <div className='flex flex-col divide-y-2 divide-solid mx-[7.5%]'>
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-        </div>
-    </div>
-  )
+    <section className="min-h-screen max-h-fit">
+      {isLoading && <Loading />}
+      {
+        <section className="grid grid-cols-4 my-5">
+          <Filters products={products} onFilterProducts={onChangeProducts} />
+
+          <div className="col-span-3 flex flex-col divide-y-2 gap-y-3 divide-solid mx-[2.5%]">
+            {productsToShow
+              ? productsToShow &&
+                productsToShow.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))
+              : products &&
+                products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+          </div>
+        </section>
+      }
+    </section>
+  );
 }
