@@ -1,31 +1,32 @@
-// import * as jwt_decode from 'jwt-decode';
+import API from "@/API"
 
-// /**
-//  * Verifies if the accessToken and Cookie are valid to save or delete the userAuth in localStorage
-//  * @returns the Auth status
-//  */
-// export const validateAccessToken = (): void => {
+type TokenValidation = {
+  valid: boolean
+}
 
-//   // Validates the cookie existence for a possible previous return
-//   if (!document.cookie.split(";")) {
-//     console.log(1);
-//     localStorage.removeItem('authUser');
-//     return;
-//   }
+const validateToken = async (): Promise<TokenValidation> => {
+  try {
+    const response = await API.post('/auth/check-token-validity');
+    return response.data as TokenValidation;
+  } catch (error) {
+    throw error;
+  }
+}
 
-//   try {
-//     // gets the jwt token and validates its expiration on the payload
-//     const accessCookie = cookies().get('accessToken');
-//     const decodedToken = jwt_decode.jwtDecode(accessCookie?.value as string);
+export const checkTokenValidity = () => {
 
-//     if (decodedToken.exp as number * 1000 < Date.now() && localStorage.getItem('authUser')) {
-//       localStorage.removeItem('authUser');
-//     }
+  async function checkToken() {
+    try {
+      const response = await validateToken();
+      return response;
+    } catch (error) {
+      throw error
+    }
+  }
 
-//   } catch (error) {
-//     console.error('Error decoding token', error);
-//   }
-// }
-
-
-
+  checkToken().then((response) => {
+    if(!response.valid) {
+      localStorage.removeItem("authUser")
+    }
+  })
+}

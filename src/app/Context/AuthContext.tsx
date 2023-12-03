@@ -4,7 +4,7 @@ import { AuthUser, Customer } from "@/types";
 import { useState, useContext, createContext } from "react";
 import { getUser, loginUser, logoutUser } from "@/services/users";
 import { useRouter } from "next/navigation";
-// import { validateAccessToken } from "@/services/auth";
+import { checkTokenValidity } from "@/services/auth";
 
 type AuthContextProps = {
   authUser: Customer | null;
@@ -17,7 +17,7 @@ type AuthContextProps = {
 const AuthContext = createContext<AuthContextProps | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  // validateAccessToken();
+  checkTokenValidity();
   const router = useRouter();
 
   const [authUser, setAuthUser] = useState<Customer | null>(() => {
@@ -30,10 +30,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return storedIsAuth ? true : false;
   });
 
-  const setAuthUserSate = (user: Customer | null) => {
+  const setAuthUserState = (user: Customer | null) => {
     setAuthUser(user);
-    localStorage.setItem("authUser", JSON.stringify(user));
-    console.log(localStorage.getItem("authUser"));
+    if (user) {
+      setIsAuth(true);
+      localStorage.setItem("authUser", JSON.stringify(user));
+    } else {
+      setIsAuth(false);
+      localStorage.removeItem("authUser");
+    }
   };
 
   const login = (user: AuthUser) => {
@@ -52,7 +57,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const setFetched = async () => {
     try {
       const user = await getUser();
-      setAuthUserSate(user);
+      setAuthUserState(user);
     } catch (error) {
       console.error("Error al obtener usuario:", error);
     }
@@ -61,10 +66,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logout = () => {
     async function logOut() {
       try {
-        await logoutUser();
-        setAuthUserSate(null);
-        setIsAuth(false);
-        localStorage.removeItem("authUser");
+        await logoutUser().then(() => {
+          setAuthUserState(null);
+        });
       } catch (error) {
         console.error("Error al cerrar sesión:", error);
       }

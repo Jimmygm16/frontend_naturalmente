@@ -46,6 +46,7 @@ export default function CartProductCard(
           <CartIncrementalbutton
             onUpdateQuantity={onUpdateQuantity}
             initialQuantity={quantity}
+            product={props.product}
           />
           <span className="text-lg text-center font-semibold text-orange-500">
             {showCurrency(props.product.price * quantity) + " COP"}
@@ -53,10 +54,7 @@ export default function CartProductCard(
         </div>
 
         <div className="flex items-center justify-end">
-          <ModalDettachProduct
-            product={props.product}
-            updateProducts={props.updateProducts}
-          />
+          <ModalDettachProduct product={props.product} />
         </div>
       </div>
     </section>

@@ -1,18 +1,20 @@
 "use client";
 
 import { Product } from "@/types";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { showCurrency } from "../../helpers";
 
-export default function ProductCard(props: { product: Product }): JSX.Element {
+export default function ProductCard(props: {
+  product: Product;
+  isInCart: boolean;
+}): JSX.Element {
   const router = useRouter();
 
-  const [isInCart, setIsInCart] = useState(true);
-
   const handleClickCard = () => {
-    router.push(`/productos/${props.product.id}`);
+    props.isInCart
+      ? router.push("/carrito")
+      : router.push(`/productos/${props.product.id}`);
   };
 
   return (
@@ -25,9 +27,10 @@ export default function ProductCard(props: { product: Product }): JSX.Element {
       <section className="p-5 col-span-3">
         <div className="flex flex-row justify-between items-center pb-4">
           <h2 className="text-xl font-semibold">{props.product.name}</h2>
-          {isInCart && (
-            <section className="py-1.5 px-7 bg-[#A4BC92] rounded-xl">
+          {props.isInCart && (
+            <section className="py-1.5 px-3 bg-[#A4BC92] rounded-xl">
               <ShoppingCartIcon className="text-white" />
+              <span className="px-2 text-white ">Guardado!</span>
             </section>
           )}
         </div>
