@@ -15,9 +15,9 @@ export default function ClientCard(props: {
                 items-center justify-between cursor-pointer hover:shadow-xl bg-slate-50
                 font-mono"
       >
-        <section className="flex flex-col m-2">
+        <section className="flex flex-col m-2 w-3/4">
           <h1 className="uppercase text-sm font-bold">{props.name}</h1>
-          <span className="text-sm">{props.email}</span>
+          <span className="text-sm whitespace-normal">{props.email}</span>
           <span className="text-sm">{props.phone_number}</span>
           <span className="text-sm">{props.address}</span>
         </section>

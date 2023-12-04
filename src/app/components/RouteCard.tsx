@@ -20,7 +20,7 @@ export default function RouteCard(props: {
     <>
       <div
         className="m-4 border border-gray-600 rounded-2xl p-4 w-96 h-40 flex flex-row
-                items-center justify-between cursor-pointer hover:shadow-2xl bg-slate-50"
+                items-center justify-between cursor-pointer hover:shadow-2xl hover:bg-slate-200 bg-slate-50 transition duration-700 ease-in-out"
         onClick={routerManager}
       >
         <h1 className="uppercase text-3xl font-mono text-gray-600">

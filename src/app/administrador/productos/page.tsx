@@ -38,14 +38,14 @@ export default function Page() {
 
   return (
     <section className="p-4 flex justify-evenly items-center h-2/3">
-      <div className="p-4 cursor-default flex flex-col w-1/4 h-[600px] overflow-y-auto relative">
+      <div className="p-4 cursor-default flex flex-col w-1/4 h-[630px] overflow-y-auto relative">
         {currentProducts.map((product: any) => (
           <ProductCrudCard
             key={product.id}
             id={product.id}
             cardName={product.name}
-            category={product["product_category"].category_name}
-            product_type={product["product_type"].product_type_name}
+            category={product["category"].name}
+            product_type={product["product_type"].name}
             price={product.price}
             quantity={product.quantity}
             img={product.img}
@@ -54,14 +54,14 @@ export default function Page() {
         ))}
         <div
           className="p-4 flex justify-end absolute bottom-9
-        left-1/2 transform -translate-x-1/2"
+        left-1/2 transform -translate-x-1/2 -translate-y-0"
         >
           {[...Array(Math.ceil(products.length / productsPerPage))].map(
             (_, index) => (
               <button
                 key={index}
                 onClick={() => paginate(index + 1)}
-                className="border border-black hover:border-green-400 p-1 rounded-xl mr-2"
+                className="border border-slate-300 bg-slate-100 hover:border-green-400 p-1 rounded-xl mr-2"
               >
                 {index + 1}
               </button>

@@ -8,8 +8,9 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Loading from "../components/Loading";
 import CartSummary from "./components/CartSummary";
 import { useAuth } from "../Context/AuthContext";
+import IsAuth from "../components/IsAuth";
 
-export default function CartPage(): JSX.Element {
+function CartPage(): JSX.Element {
   const { authUser } = useAuth();
 
   const [products, isLoading, setProducts] = useFetch(
@@ -64,3 +65,5 @@ export default function CartPage(): JSX.Element {
     </>
   );
 }
+
+export default IsAuth(CartPage);

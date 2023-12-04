@@ -5,7 +5,9 @@ const formatNewUser = (newUser: NewUser) => {
   return {
     name: newUser.name + ' ' + newUser.lastName,
     email: newUser.email,
-    password: newUser.password
+    password: newUser.password,
+    phone_number: newUser.phone_number,
+    address: newUser.address
   }
 }
 

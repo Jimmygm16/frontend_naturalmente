@@ -66,8 +66,15 @@ export default function FormCrudProduct(props: {
         const response = await createProduct(product);
         console.log(response);
       }
+      product_components.name = "";
+      product_components.description = "";
+      product_components.price = "";
+      product_components.quantity = "";
+      product_components.img = "";
+      alert("Producto creado exitosamente");
     } catch (e) {
       console.log(e);
+      alert("Error al crear el producto");
     }
     if (props.reloadProducts) props.reloadProducts();
   }
@@ -98,11 +105,11 @@ export default function FormCrudProduct(props: {
   }, []);
 
   return (
-    <div className="p-5 flex flex-col border border-black rounded-lg bg-gray-50 ">
+    <div className="p-5 flex flex-col border-2 border-slate-300 rounded-lg bg-slate-100 ">
       <span className="text-xs">Nombre del producto</span>
       <input
         className="border-b border-black mb-2 px-1
-            focus:outline-none focus:border-green-400"
+            focus:outline-none focus:border-b-2 focus:border-green-400 bg-slate-100"
         type="text"
         onChange={handleInputChange}
         value={product_components.name}
@@ -112,7 +119,7 @@ export default function FormCrudProduct(props: {
       <textarea
         id="productDescription"
         className="w-full h-32 px-1 text-base
-            border border-black rounded-md focus:border-green-400 focus:outline-none"
+            border border-black rounded-md focus:border-2 focus:border-green-400 focus:outline-none bg-slate-100"
         onChange={handleInputChange}
         value={product_components.description}
         name="description"
@@ -120,7 +127,7 @@ export default function FormCrudProduct(props: {
       <span className="text-xs">Precio</span>
       <input
         className="border-b border-black mb-2 px-1
-            focus:border-green-400 focus:outline-none "
+            focus:border-green-400 focus:outline-none focus:border-b-2 bg-slate-100"
         type="text"
         onChange={handleInputChange}
         value={product_components.price}
@@ -137,7 +144,7 @@ export default function FormCrudProduct(props: {
       <span className="text-xs">Cantidad</span>
       <input
         className="border-b border-black mb-2 px-1
-            focus:border-green-400 focus:outline-none"
+            focus:border-green-400 focus:outline-none focus:border-b-2 bg-slate-100"
         type="number"
         onChange={handleInputChange}
         value={product_components.quantity}
@@ -147,7 +154,7 @@ export default function FormCrudProduct(props: {
       <div className="inline-flex">
         <input className="w-60" type="file" onChange={handleInputChange} />
         <button
-          className="border border-black rounded-2xl p-2"
+          className="border border-black rounded-lg p-2 hover:bg-slate-200 "
           onClick={handleProduct}
         >
           Aceptar

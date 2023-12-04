@@ -14,8 +14,8 @@ type Product = {
   description: string;
   price: number;
   quantity: number;
-  category: Category
-  product_type: ProductType
+  category: Category | number;
+  product_type: ProductType | number;
   img: string;
   created_at?: string;
   updated_at?: string;
@@ -35,6 +35,7 @@ type Customer = {
   name: string;
   email: string;
   phone_number: string;
+  addres: string;
   status: string;
   profile_image: string;
 }
@@ -49,6 +50,8 @@ type NewUser = {
   lastName?: string;
   email: string;
   password: string;
+  phone_number: string,
+  address: string
 }
 
 type AuthUser = {

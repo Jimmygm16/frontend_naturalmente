@@ -1,8 +1,10 @@
 "use client";
 
+import IsAuth from "@/app/components/IsAuth";
+
 import { useAuth } from "@/app/Context/AuthContext";
 
-export default function ProfilePage(): JSX.Element {
+function ProfilePage(): JSX.Element {
   const { authUser, isAuth } = useAuth();
 
   return (
@@ -11,3 +13,5 @@ export default function ProfilePage(): JSX.Element {
     </section>
   );
 }
+
+export default IsAuth(ProfilePage);
