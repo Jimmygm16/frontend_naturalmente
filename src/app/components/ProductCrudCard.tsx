@@ -40,7 +40,7 @@ export default function ProductCard(props: {
         closeModal={closeModal}
         reloadProducts={props.reloadProducts}
       />
-      <div className="border border-black p-4 m-2 inline-flex w-full relative rounded-lg">
+      <div className="border-2 border-slate-300 bg-slate-100 p-4 m-2 inline-flex w-full relative rounded-lg">
         <img
           className="p-2 w-16 h-full"
           src="https://cdn-icons-png.flaticon.com/128/892/892917.png"

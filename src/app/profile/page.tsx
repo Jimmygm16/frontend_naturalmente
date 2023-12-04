@@ -3,7 +3,13 @@ import Image from "next/image";
 import men from "../../sources/hombre.png";
 import edit from "../../sources/editar.png";
 import { useState } from "react";
+import IsAuth from "@/app/components/IsAuth";
 
+import { useAuth } from "@/app/Context/AuthContext";
+
+function ProfilePage(): JSX.Element {
+  const { authUser, isAuth } = useAuth();
+    
 interface Profile {
   name: string;
   address: string;
@@ -115,3 +121,5 @@ export default function ProfilePage(): JSX.Element {
     </section>
   );
 }
+
+export default IsAuth(ProfilePage);

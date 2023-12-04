@@ -5,6 +5,7 @@ import { Product } from "@/types";
 import { useState } from "react";
 import ProductCard from "../productos/ProductCard";
 import Filters from "./Filters";
+import Loading from "@/app/components/Loading";
 import Loading from "../components/Loading";
 import { useCart } from "../Context/CartContext";
 import { useState } from "react";

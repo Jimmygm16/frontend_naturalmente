@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { registerUser } from "@/services/users";
 import { LOGIN_PATH } from "../consts";
 import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
 
 export default function RegisterPage() {
   /**
@@ -22,6 +23,8 @@ export default function RegisterPage() {
     lastName: "",
     email: "",
     password: "",
+    phone_number: "",
+    address: "",
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -100,7 +103,6 @@ export default function RegisterPage() {
         console.error("Error al registrar usuario:", error);
       }
     }
-
     fetchRegister();
     notify();
   };
@@ -164,6 +166,43 @@ export default function RegisterPage() {
             onChange={handleImputChange}
           />
           <span className="text-xs mb-3 cursor-default">{errorMessage}</span>
+          <span className="mb-1 text-xs font-bold cursor-default ">
+            Teléfono
+          </span>
+          <input
+            className="border border-green-700 mb-3 rounded-sm px-2 py-1"
+            type="phone_number"
+            name="phone_number"
+            value={newUser.phone_number}
+            placeholder="telefono"
+            onChange={handleImputChange}
+          />
+          <span className="mb-1 text-xs font-bold cursor-default ">
+            Dirección
+          </span>
+          <input
+            className="border border-green-700 mb-3 rounded-sm px-2 py-1"
+            type="address"
+            name="address"
+            value={newUser.address}
+            placeholder="dirección"
+            onChange={handleImputChange}
+          />
+          <button className="bg-transparent hover:bg-[#DDFFBB] rounded-md text-black font-semibold py-2 px-4 border border-green-700 mb-4">
+            Registrarse
+          </button>
+          <ToastContainer />
+          <section className="flex flex-row gap-2">
+            <span className="text-xs font-semibold">
+              ¿Ya tienes una cuenta?
+            </span>
+            <Link
+              href="/login"
+              className="text-xs text-green-700 font-bold hover:underline"
+            >
+              Iniciar sesión
+            </Link>
+          </section>
           <button className="bg-transparent hover:bg-[#DDFFBB] rounded-md text-black font-semibold py-2 px-4 border border-green-700">
             Registrarse
           </button>

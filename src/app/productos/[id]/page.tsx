@@ -1,11 +1,12 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import useFetch from "@/hooks/useFetch";
 import { Product } from "@/types";
 import { showCurrency } from "@/helpers";
 import IncrementalButton from "@/app/components/IncrementalButton";
 import Loading from "@/app/components/Loading";
+import { useAuth } from "@/app/Context/AuthContext";
+import { useRouter } from "next/navigation";
 import { useCart } from "@/app/Context/CartContext";
 
 export default function SingleProductPage({
@@ -16,10 +17,11 @@ export default function SingleProductPage({
   const [product, isLoading, setProduct] = useFetch(
     `/products/${params.id}`
   ) as [Product, boolean, () => void];
-
   const { addProduct } = useCart();
   const [price, setPrice] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(1);
+  const { authUser, isAuth } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     if (product) {
@@ -32,6 +34,31 @@ export default function SingleProductPage({
     setQuantity(productQuantity);
   };
 
+  const handleAddToCart = () => {
+    async function addToCart() {
+      try {
+        quantity > 1
+          ? await addProductToCart(
+              authUser?.id as number,
+              product.id as number,
+              {
+                orderedQuantity: quantity,
+              }
+            )
+          : await addProductToCart(
+              authUser?.id as number,
+              product.id as number
+            );
+      } catch (error) {
+        throw new Error("Error al agregar al carrito" + error);
+      }
+    }
+    if (isAuth) {
+      addToCart();
+    } else {
+      router.push("/login");
+    }
+  };
   return (
     <>
       {isLoading && <Loading />}

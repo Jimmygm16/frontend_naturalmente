@@ -45,6 +45,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     async function fetchUser() {
       try {
         await loginUser(user);
+        setIsAuth(true);
+        router.push("/profile");
       } catch (error) {
         console.error("Error al obtener usuario:", error);
       }

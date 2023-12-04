@@ -2,10 +2,10 @@
 import ClientCard from "@/app/components/ClientCard";
 import react, { useState, useEffect } from "react";
 import { getCustomers } from "@/services/customers";
-import { Client } from "@/types";
+import { Customer } from "@/types";
 
 export default function page() {
-  const [customers, setCustomers] = useState<Client[]>([]);
+  const [customers, setCustomers] = useState<Customer[]>([]);
 
   async function fetchCustomers() {
     const customers = await getCustomers();

@@ -8,9 +8,10 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Loading from "../components/Loading";
 import CartSummary from "./components/CartSummary";
 import { useAuth } from "../Context/AuthContext";
+import IsAuth from "../components/IsAuth";
 import { useCart } from "../Context/CartContext";
 
-export default function CartPage(): JSX.Element {
+function CartPage(): JSX.Element {
   const { authUser } = useAuth();
   const { cartProducts, isLoading, setCartProducts } = useCart();
 
@@ -70,3 +71,5 @@ export default function CartPage(): JSX.Element {
     </>
   );
 }
+
+export default IsAuth(CartPage);
