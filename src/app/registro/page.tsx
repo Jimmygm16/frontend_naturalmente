@@ -203,6 +203,10 @@ export default function RegisterPage() {
               Iniciar sesión
             </Link>
           </section>
+          <button className="bg-transparent hover:bg-[#DDFFBB] rounded-md text-black font-semibold py-2 px-4 border border-green-700">
+            Registrarse
+          </button>
+          <ToastContainer />
         </form>
       </section>
     </div>

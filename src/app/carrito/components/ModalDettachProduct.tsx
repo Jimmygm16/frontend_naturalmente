@@ -3,43 +3,24 @@
 import { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { CartProduct } from "@/types";
-import { deleteProductFromCart } from "../helpers";
-import Loading from "@/app/loading";
+import { useCart } from "@/app/Context/CartContext";
 
 type ModalDettachProductProps = {
   product: CartProduct;
-  updateProducts: (products: CartProduct[]) => void;
 };
 
 export default function ModalDettachProduct(
   props: ModalDettachProductProps
 ): JSX.Element {
   const [open, setOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const { removeProduct } = useCart();
 
   const handleOpen = () => {
     setOpen(!open);
   };
 
   const handleDeleteProduct = () => {
-    async function deleteProduct() {
-      try {
-        setIsLoading(true);
-        await deleteProductFromCart(
-          props.product.pivot.user_id,
-          props.product.pivot.product_id
-        )
-          .then((response) => {
-            if (response) {
-              props.updateProducts(response);
-            }
-          })
-          .finally(() => setIsLoading(false));
-      } catch (error) {
-        throw new Error("Error al eliminar el producto" + error);
-      }
-    }
-    deleteProduct();
+    removeProduct(props.product);
     setOpen(false);
   };
 
@@ -51,7 +32,6 @@ export default function ModalDettachProduct(
       >
         <DeleteIcon sx={{ fontSize: 30 }} />
       </button>
-      {isLoading && <Loading />}
       {open && (
         <section className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
           <section className="bg-white rounded-lg w-[30%] h-[25%] flex flex-col justify-center items-center text-3xl text-center">

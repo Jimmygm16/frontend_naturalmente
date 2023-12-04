@@ -12,15 +12,16 @@ import {
   PROFILE_PATH,
 } from "../consts";
 import { useAuth } from "@/app/Context/AuthContext";
+import { useRouter } from "next/navigation";
 import FaceIcon from "@mui/icons-material/Face";
+import ProfileCard from "./ProfileDropDownMenu";
+import ProfileDropDownMenu from "./ProfileDropDownMenu";
 import { useRouter } from "next/navigation";
 
 function Header(): JSX.Element {
   const { isAuth } = useAuth();
   const router = useRouter();
 
-  // const pathname = usePathname();
-  // const isInAuth = pathname == LOGIN_PATH || pathname == REGISTER_PATH;
   return (
     <header className="w-full bg-white shadow-lg border-gray-600">
       <nav className="utilidad max-h-fit py-1.5 flex items-center justify-between">
@@ -37,7 +38,7 @@ function Header(): JSX.Element {
         <input type="checkbox" id="menu" className="peer hidden" />
         <label
           htmlFor="menu"
-          className="bg-open-menu w-5 h-5 cursor-pointer peer-checked:bg-close-menu transition-all z-50  md:hidden "
+          className="bg-open-menu w-5 h-5 cursor-pointer peer-checked:bg-close-menu transition-all z-50 md:hidden "
         ></label>
 
         <section className="flex flex-row gap-10">
@@ -74,15 +75,9 @@ function Header(): JSX.Element {
             </div>
           </div>
 
-          <div className="hidden lg:flex gap-3">
+          <div className="lg:flex gap-3 overflow-visible">
             {isAuth ? (
-              <Link
-                href={PROFILE_PATH}
-                className="btn hover:shadow-sm shadow-color4/30"
-              >
-                <FaceIcon />
-                Perfil
-              </Link>
+              <ProfileDropDownMenu />
             ) : (
               <>
                 <Link

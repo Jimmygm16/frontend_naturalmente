@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import useFetch from "@/hooks/useFetch";
 import { Product } from "@/types";
 import { showCurrency } from "@/helpers";
-import { addProductToCart } from "@/services/users";
 import IncrementalButton from "@/app/components/IncrementalButton";
 import Loading from "@/app/components/Loading";
 import { useAuth } from "@/app/Context/AuthContext";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/app/Context/CartContext";
 
 export default function SingleProductPage({
   params,
@@ -17,7 +17,7 @@ export default function SingleProductPage({
   const [product, isLoading, setProduct] = useFetch(
     `/products/${params.id}`
   ) as [Product, boolean, () => void];
-
+  const { addProduct } = useCart();
   const [price, setPrice] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(1);
   const { authUser, isAuth } = useAuth();
@@ -82,7 +82,10 @@ export default function SingleProductPage({
               <span>{product.description}</span>
             </div>
             <div className="flex flex-row gap-3 py-5">
-              <button className="btn w-full" onClick={handleAddToCart}>
+              <button
+                className="btn w-full"
+                onClick={() => addProduct(quantity, params.id)}
+              >
                 Agregar al carrito
               </button>
               <button className="btn w-full bg-orange-300">Comprar</button>

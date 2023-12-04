@@ -51,33 +51,3 @@ export const getUser = async (): Promise<Customer> => {
     throw error;
   }
 }
-
-export const addProductToCart = async ( user_id: number | string, proudct_id: number | string, data?: { orderedQuantity: number } ): Promise<void> => {
-  try {
-    if(data) {
-      await API.post(`/users/${user_id}/products/${proudct_id}`, data);
-    } else {
-      await API.post(`/users/${user_id}/products/${proudct_id}`);
-    }
-  } catch(error) {
-    throw error;
-  }
-}
-
-export const getProductsFromCart = async (user_id: number): Promise<CartProduct[]> => {
-  try {
-    const response = await API.get(`/users/${user_id}/products`);
-    return response.data.data as CartProduct[];
-  } catch(error) {
-    throw error;
-  }
-}
-
-export const detachProductFromCart = async ( user_id: number | string, proudct_id: number | string ): Promise<CartProduct[]> => {
-  try {
-    const response = await API.delete(`/users/${user_id}/products/${proudct_id}`);
-    return response.data.data as CartProduct[];
-  } catch(error) {
-    throw error;
-  }
-}

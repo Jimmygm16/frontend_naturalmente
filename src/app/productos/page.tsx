@@ -6,6 +6,9 @@ import { useState } from "react";
 import ProductCard from "../productos/ProductCard";
 import Filters from "./Filters";
 import Loading from "@/app/components/Loading";
+import Loading from "../components/Loading";
+import { useCart } from "../Context/CartContext";
+import { useState } from "react";
 
 export default function ProductsPage(): JSX.Element {
   const [products, isLoading, serProducts] = useFetch("/products") as [
@@ -13,10 +16,19 @@ export default function ProductsPage(): JSX.Element {
     boolean,
     (products: Product[]) => void
   ];
+  const { cartProducts } = useCart();
   const [productsToShow, setProductsToShow] = useState<Product[]>(products);
 
   const onChangeProducts = (products: Product[]) => {
     setProductsToShow(products);
+  };
+
+  const isInCart = (product: Product) => {
+    if (cartProducts) {
+      return cartProducts.some((cartProduct) => cartProduct.id === product.id);
+    } else {
+      return false;
+    }
   };
 
   return (
@@ -30,11 +42,19 @@ export default function ProductsPage(): JSX.Element {
             {productsToShow
               ? productsToShow &&
                 productsToShow.map((product) => (
-                  <ProductCard key={product.id} product={product} />
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    isInCart={isInCart(product)}
+                  />
                 ))
               : products &&
                 products.map((product) => (
-                  <ProductCard key={product.id} product={product} />
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    isInCart={isInCart(product)}
+                  />
                 ))}
           </div>
         </section>
