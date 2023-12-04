@@ -60,7 +60,6 @@ export async function getProduct(id:number){
 export async function updateProduct(product_id:number, product: Product): Promise<Product>{
   try {
     const response = await API.put(`/products/${product_id}`, product);
-    console.log("actualizado");
     return response.data.data as Product;
   } catch (error) {
     console.log(error);

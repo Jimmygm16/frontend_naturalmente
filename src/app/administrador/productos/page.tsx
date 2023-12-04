@@ -37,14 +37,14 @@ export default function Page() {
   };
 
   return (
-    <section className="p-4 flex justify-evenly items-center h-2/3">
+    <section className="p-4 flex justify-evenly items-center h-screen">
       <div className="p-4 cursor-default flex flex-col w-1/4 h-[600px] overflow-y-auto relative">
         {currentProducts.map((product: any) => (
           <ProductCrudCard
             key={product.id}
             id={product.id}
             cardName={product.name}
-            category={product["product_category"].category_name}
+            category={product.category.name}
             product_type={product["product_type"].product_type_name}
             price={product.price}
             quantity={product.quantity}

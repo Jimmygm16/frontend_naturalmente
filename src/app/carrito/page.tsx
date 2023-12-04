@@ -8,18 +8,16 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Loading from "../components/Loading";
 import CartSummary from "./components/CartSummary";
 import { useAuth } from "../Context/AuthContext";
+import { useCart } from "../Context/CartContext";
 
 export default function CartPage(): JSX.Element {
   const { authUser } = useAuth();
-
-  const [products, isLoading, setProducts] = useFetch(
-    `/users/${authUser?.id}/products`
-  ) as [CartProduct[], boolean, (products: CartProduct[]) => void];
+  const { cartProducts, isLoading, setCartProducts } = useCart();
 
   const router = useRouter();
 
   const handleUpdateProducts = (products: CartProduct[]) => {
-    setProducts(products);
+    setCartProducts(products);
   };
 
   return (
@@ -33,14 +31,22 @@ export default function CartPage(): JSX.Element {
             </h2>
 
             <div className="flex flex-col gap-2 my-2">
-              {products &&
-                products.map((product) => (
+              {cartProducts && cartProducts.length > 0 ? (
+                cartProducts &&
+                cartProducts.map((product) => (
                   <CartProductCard
                     key={product.id}
                     product={product}
                     updateProducts={handleUpdateProducts}
                   />
-                ))}
+                ))
+              ) : (
+                <section className="py-[10%] bg-gray-50">
+                  <span className="flex justify-center text-2xl font-light text-center text-gray-500">
+                    Tu carrito aún está vacío! 😢
+                  </span>
+                </section>
+              )}
             </div>
 
             <div className="flex flex-row justify-between my-4">
@@ -57,7 +63,7 @@ export default function CartPage(): JSX.Element {
           </section>
 
           <section>
-            <CartSummary products={products} />
+            <CartSummary products={cartProducts} />
           </section>
         </section>
       }

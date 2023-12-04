@@ -3,12 +3,10 @@
 import { useState, useEffect } from "react";
 import useFetch from "@/hooks/useFetch";
 import { Product } from "@/types";
-import { getSingleProduct } from "@/services/products";
 import { showCurrency } from "@/helpers";
-import { addProductToCart } from "@/services/users";
 import IncrementalButton from "@/app/components/IncrementalButton";
 import Loading from "@/app/components/Loading";
-import { useAuth } from "@/app/Context/AuthContext";
+import { useCart } from "@/app/Context/CartContext";
 
 export default function SingleProductPage({
   params,
@@ -17,17 +15,9 @@ export default function SingleProductPage({
 }): JSX.Element {
   const [product, isLoading, setProduct] = useFetch(
     `/products/${params.id}`
-  ) as [Product, boolean, (product: Product) => void];
+  ) as [Product, boolean, () => void];
 
-  const { authUser, redirectOnMissingAuth } = useAuth();
-
-
-export default function SingleProductPage({
-  params,
-}: {
-  params: { id: string };
-}): JSX.Element {
-  const [product, setProduct] = useState<Product>();
+  const { addProduct } = useCart();
   const [price, setPrice] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(1);
 
@@ -35,32 +25,11 @@ export default function SingleProductPage({
     if (product) {
       setPrice(product.price as number);
     }
-    fetchProduct();
-  }, [params.id]);
+  }, [product]);
 
   const handlePrice = (productQuantity: number) => {
     setPrice(productQuantity * product.price);
     setQuantity(productQuantity);
-  };
-
-  const handleAddToCart = () => {
-    async function addToCart() {
-      try {
-        quantity > 1
-          ? await addProductToCart(authUser?.id as number, params.id, {
-              orderedQuantity: quantity,
-            })
-          : await addProductToCart(authUser?.id as number, params.id);
-      } catch (error) {
-        throw new Error("Error al agregar al carrito" + error);
-      }
-    }
-    addToCart();
-  };
-
-  const handleBuy = () => {
-    console.log("Comprar");
-    redirectOnMissingAuth();
   };
 
   return (
@@ -69,12 +38,10 @@ export default function SingleProductPage({
       {product && (
         <section className="h-screen grid grid-cols-2 py-3">
           <section className="w-full"></section>
-
           <section className="flex flex-col w-[90%] mx-auto">
             <div className="font-semibold text-4xl py-6">
               <h1> {product.name} </h1>
             </div>
-
             <div className="flex flex-row justify-between py-5 border-t-2 border-b-2 border-gray-200 items-center">
               <span className="font-semibold text-3xl text-color4">
                 {showCurrency(price) + " COP"}
@@ -84,18 +51,17 @@ export default function SingleProductPage({
               </span>
               <IncrementalButton onUpdateQuantity={handlePrice} />
             </div>
-
             <div className="py-5 text-xl">
               <span>{product.description}</span>
             </div>
-
             <div className="flex flex-row gap-3 py-5">
-              <button className="btn w-full" onClick={handleAddToCart}>
+              <button
+                className="btn w-full"
+                onClick={() => addProduct(quantity, params.id)}
+              >
                 Agregar al carrito
               </button>
-              <button className="btn w-full bg-orange-300" onClick={handleBuy}>
-                Comprar
-              </button>
+              <button className="btn w-full bg-orange-300">Comprar</button>
             </div>
           </section>
         </section>
