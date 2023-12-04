@@ -1,10 +1,5 @@
 import Image from "next/image";
 import group from "../sources/group.jpg";
-import ProductComponent from "./components/Product";
-import p1 from "../sources/product1.jpg";
-import p2 from "../sources/product2.jpg";
-import p3 from "../sources/product3.jpg";
-import p4 from "../sources/product4.jpg";
 function LandingPage() {
   return (
     <>
@@ -42,8 +37,8 @@ function LandingPage() {
             </li>
           </ul>
         </section>
-        <section className="border-2 border-green-800 p-3 mx-auto w-8/12 h-auto mt-32 cursor-default mb-14">
-          <h1 className="text-4xl font-bold text-green-800 mb-4 text-center">
+        <section className="border-2 border-color4 p-3 mx-auto w-8/12 h-auto mt-32 cursor-default mb-14">
+          <h1 className="text-4xl font-bold text-color4 mb-4 text-center">
             {" "}
             Servicios.
           </h1>
@@ -57,14 +52,14 @@ function LandingPage() {
             ante viverra etiam odio aliquet egestas auctor facilisi, mattis nam
             diam rutrum dis dictumst pretium sagittis.
           </span>
-          <details className="bg-gray-200 mt-8 open:bg-gray-500 duration-1000 ">
+          <details className="bg-color4 mt-8 open:bg-color3 duration-1000 ">
             <summary className="bg-inherit px-5 py-3 text-lg cursor-pointer">
               Nuestros servicios
             </summary>
             <div className="bg-white px-5 py-3 border border-gray-300 text-sm font-light">
               <ul>
                 <li className="mt-3 mb-3">
-                  <span className="font-bold text-green-800 cursor-pointer">
+                  <span className="font-bold text-color3 cursor-pointer">
                     Venta de productos naturales:
                   </span>
                   <span>
@@ -80,7 +75,7 @@ function LandingPage() {
                   </span>
                 </li>
                 <li className="mb-3">
-                  <span className="font-bold text-green-800 cursor-pointer">
+                  <span className="font-bold text-color3 cursor-pointer">
                     Información de cálidad:
                   </span>
                   <span>
@@ -96,7 +91,7 @@ function LandingPage() {
                   </span>
                 </li>
                 <li>
-                  <span className="font-bold text-green-800 cursor-pointer">
+                  <span className="font-bold text-color3 cursor-pointer">
                     Asesoría gratuita:
                   </span>
                   <span>

@@ -13,6 +13,7 @@ import {
 } from "../consts";
 import { useAuth } from "@/app/Context/AuthContext";
 import FaceIcon from "@mui/icons-material/Face";
+import { useRouter } from "next/navigation";
 
 function Header(): JSX.Element {
   const { isAuth } = useAuth();
