@@ -2,7 +2,6 @@
 
 import { CartProduct } from "@/types";
 import { useRouter } from "next/navigation";
-import useFetch from "@/hooks/useFetch";
 import CartProductCard from "./components/CartProductCard";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Loading from "../components/Loading";

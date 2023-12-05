@@ -13,8 +13,6 @@ import {
 } from "../consts";
 import { useAuth } from "@/app/Context/AuthContext";
 import { useRouter } from "next/navigation";
-import FaceIcon from "@mui/icons-material/Face";
-import ProfileCard from "./ProfileDropDownMenu";
 import ProfileDropDownMenu from "./ProfileDropDownMenu";
 
 function Header(): JSX.Element {

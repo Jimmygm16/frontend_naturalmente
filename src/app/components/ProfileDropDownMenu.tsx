@@ -29,7 +29,8 @@ export default function App() {
         className="bg-gray-100 px-2 py-1.5 rounded-lg shadow-lg text-xl"
       >
         <DropdownItem
-          key="new"
+          key="profile"
+          textValue="Profile"
           className="flex flex-row items-center font-light hover:text-white hover:bg-color4 outline-none hover:rounded-md hover:transition-colors duration-200"
           onClick={() => {
             router.push("/profile");
@@ -39,7 +40,8 @@ export default function App() {
           <span className="px-2">Mi perfil</span>
         </DropdownItem>
         <DropdownItem
-          key="copy"
+          key="cart"
+          textValue="Cart"
           className="flex flex-row items-center font-light hover:text-white hover:bg-color4 outline-none hover:rounded-md hover:transition-colors duration-200"
           onClick={() => {
             router.push("/carrito");
@@ -49,7 +51,8 @@ export default function App() {
           <span className="px-2">Mi carrito</span>
         </DropdownItem>
         <DropdownItem
-          key="edit"
+          key="buys"
+          textValue="Buys"
           className="flex flex-row items-center font-light hover:text-white hover:bg-color4 outline-none hover:rounded-md hover:transition-colors duration-200"
           onClick={() => {
             router.push("/");
@@ -60,6 +63,7 @@ export default function App() {
         </DropdownItem>
         <DropdownItem
           key="logout"
+          textValue="Logout"
           className="flex flex-row items-center font-light mt-2 border-gray-200 hover:text-white hover:bg-red-500 outline-none hover:rounded-md hover:transition-colors duration-200"
           onClick={logout}
         >

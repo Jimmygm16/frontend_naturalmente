@@ -46,7 +46,7 @@ export const getUser = async (): Promise<Customer> => {
     const response = await API.post('/auth/profile', null, {
       withCredentials: true,
     });
-    return response.data as Customer;
+    return response.data.data as Customer;
   } catch (error) {
     throw error;
   }

@@ -22,6 +22,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const [authUser, setAuthUser] = useState<Customer | null>(() => {
     const storedUser = localStorage.getItem("authUser");
+    console.log(storedUser);
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
