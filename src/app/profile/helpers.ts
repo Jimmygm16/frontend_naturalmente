@@ -4,7 +4,7 @@ import { Customer } from "@/types";
 export type ProfileRequiredData = {
   name: string;
   email: string;
-  phone: string;
+  phone_number: string;
   address: string;
 };
 
@@ -17,10 +17,10 @@ const getChangedFields = (originalData: Customer, newData: ProfileRequiredData):
   if (originalData.email !== newData.email) {
     changedFields.email = newData.email;
   }
-  if (originalData.phone_number !== newData.phone) {
-    changedFields.phone_number = newData.phone;
+  if (originalData.phone_number !== newData.phone_number) {
+    changedFields.phone_number = newData.phone_number;
   }
-  if (originalData.addres !== newData.address) {
+  if (originalData.address !== newData.address) {
     changedFields.address = newData.address;
   }
   return changedFields as UpdateProfileData;

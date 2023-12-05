@@ -35,7 +35,7 @@ type Customer = {
   name: string;
   email: string;
   phone_number: string;
-  addres: string;
+  address: string;
   status: string;
   profile_image: string;
 }
@@ -76,6 +76,16 @@ type Filters = {
   productTypes: number[];
 };
 
+type Sell ={
+  id: number;
+  user_id: number;
+  total_price: number;
+  status: string;
+  created_at: string;
+  updated_at: string;
+  products: Product[];
+}
+
 export type {
   Product,
   Category,
@@ -85,5 +95,6 @@ export type {
   AuthUser,
   User,
   Filters,
-  CartProduct
+  CartProduct,
+  Sell
 };
