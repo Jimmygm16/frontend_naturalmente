@@ -8,11 +8,12 @@ import IsAuth from "@/app/components/IsAuth";
 import type { Customer } from "@/types";
 import { useAuth } from "../Context/AuthContext";
 import { KEYS_TO_EXCLUDE, FORMATED_KEYS } from "./consts";
+import { updateProfile } from "./helpers";
 
 type ProfileRequiredData = {
   name: string;
   email: string;
-  phone: string;
+  phone_number: string;
   address: string;
 };
 
@@ -22,6 +23,7 @@ function ProfilePage(): JSX.Element {
   const { authUser } = useAuth();
 
   const hanldeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.name);
     setProfile({
       ...(profile as ProfileRequiredData),
       [e.target.name]: e.target.value,
@@ -32,7 +34,7 @@ function ProfilePage(): JSX.Element {
     return {
       name: authUser ? authUser.name : "",
       email: authUser ? authUser.email : "",
-      phone: authUser?.phone_number ? authUser.phone_number : "",
+      phone_number: authUser?.phone_number ? authUser.phone_number : "",
       address: authUser?.addres ? authUser.addres : "",
     };
   };
@@ -40,8 +42,6 @@ function ProfilePage(): JSX.Element {
   const [profile, setProfile] = useState<ProfileRequiredData>(
     handleSetBaseUserData()
   );
-
-  const handleUpdateProfile = () => {};
 
   return (
     <section className="container mx-auto px-4 py-8 h-screen">
@@ -108,10 +108,21 @@ function ProfilePage(): JSX.Element {
                   </div>
                 ))}
             <div className="flex space-x-4 justify-end mt-10">
-              <button className="btn">Guardar cambios</button>
+              <button
+                onClick={() =>
+                  updateProfile(
+                    authUser as Customer,
+                    profile,
+                    authUser?.id as number
+                  )
+                }
+                className="btn"
+              >
+                Guardar cambios
+              </button>
               <button
                 onClick={() => {
-                  setProfile(handleSetBaseUserData());
+                  setProfile(handleSetBaseUserData);
                 }}
                 className="btn bg-red-500"
               >
