@@ -84,7 +84,11 @@ export default function SingleProductPage({
             <div className="flex flex-row gap-3 py-5">
               <button
                 className="btn w-full"
-                onClick={() => addProduct(quantity, params.id)}
+                onClick={() => {
+                  if (!isAuth) {
+                    router.push("/login");
+                  } else addProduct(quantity, params.id);
+                }}
               >
                 Agregar al carrito
               </button>

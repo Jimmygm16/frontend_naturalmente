@@ -16,7 +16,6 @@ import { useRouter } from "next/navigation";
 import FaceIcon from "@mui/icons-material/Face";
 import ProfileCard from "./ProfileDropDownMenu";
 import ProfileDropDownMenu from "./ProfileDropDownMenu";
-import { useRouter } from "next/navigation";
 
 function Header(): JSX.Element {
   const { isAuth } = useAuth();
@@ -47,9 +46,6 @@ function Header(): JSX.Element {
               <li>
                 <Link href={PRODUCTS_PATH}>Productos</Link>
               </li>
-              <li>
-                <Link href={CART_PATH}>Carrito</Link>
-              </li>
             </ul>
           </div>
 
@@ -61,9 +57,6 @@ function Header(): JSX.Element {
                 </li>
                 <li>
                   <Link href={PRODUCTS_PATH}>Productos</Link>
-                </li>
-                <li>
-                  <Link href={CART_PATH}>Carrito</Link>
                 </li>
                 <li className="lg:hidden">
                   <Link href={LOGIN_PATH}>Iniciar sesion</Link>

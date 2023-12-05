@@ -41,7 +41,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const login = (user: AuthUser) => {
+  const login = async (user: AuthUser) => {
     async function fetchUser() {
       try {
         await loginUser(user);
@@ -51,7 +51,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         console.error("Error al obtener usuario:", error);
       }
     }
-
     fetchUser();
     setFetched();
   };
@@ -71,6 +70,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         await logoutUser().then(() => {
           setAuthUserState(null);
         });
+        router.push("/login");
       } catch (error) {
         console.error("Error al cerrar sesión:", error);
       }
