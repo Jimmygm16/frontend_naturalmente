@@ -35,7 +35,7 @@ type Customer = {
   name: string;
   email: string;
   phone_number: string;
-  addres: string;
+  address: string;
   status: string;
   profile_image: string;
 }

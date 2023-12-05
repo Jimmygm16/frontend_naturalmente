@@ -1,6 +1,7 @@
 "use client";
 
 import useFetch from "@/hooks/useFetch";
+import { useState } from "react";
 import { Product } from "@/types";
 import ProductCard from "../productos/ProductCard";
 import Filters from "./Filters";
