@@ -14,7 +14,7 @@ export default function CartSummary(props: CartSummaryProps): JSX.Element {
         <details className="hover:cursor-pointer py-1 duration-700">
           <summary className="flex justify-between bg-inherit text-lg">
             <span className="font-light">
-              {`Ârtivulos comprados: ${sumAmountOfProducts(props.products)}`}
+              {`Artículos comprados: ${sumAmountOfProducts(props.products)}`}
             </span>
             <span className="font-semibold text-color3">
               {`${showCurrency(sumTotalPrice(props.products))} COP`}
@@ -68,7 +68,7 @@ export default function CartSummary(props: CartSummaryProps): JSX.Element {
         </div>
         <button className="w-full flex items-center gap-2 justify-center text-md font-semibold text-white bg-color4 rounded-3xl py-3 mt-5">
           <ShoppingCartIcon sx={{ fontSize: 20 }} />
-          Reliazar pedido
+          Realizar pedido
         </button>
       </div>
     </section>

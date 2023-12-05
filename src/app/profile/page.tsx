@@ -4,8 +4,7 @@ import Image from "next/image";
 import men from "../../sources/hombre.png";
 import edit from "../../sources/editar.png";
 import { useState } from "react";
-import IsAuth from "@/app/components/IsAuth";
-import type { Customer } from "@/types";
+import IsAuth from "@/app/components/import type { Customer } from "@/types";
 import { useAuth } from "../Context/AuthContext";
 import { KEYS_TO_EXCLUDE, FORMATED_KEYS } from "./consts";
 import { updateProfile } from "./helpers";
@@ -29,6 +28,18 @@ function ProfilePage(): JSX.Element {
       [e.target.name]: e.target.value,
     });
   };
+
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e) =>
+        setChanges((prev) => ({
+          ...prev,
+          avatar: e.target.result as string,
+        }));
+      reader.readAsDataURL(event.target.files[0]);
+    }
 
   const handleSetBaseUserData = (): ProfileRequiredData => {
     return {

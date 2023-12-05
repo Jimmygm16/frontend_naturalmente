@@ -31,7 +31,7 @@ export default function RegisterPage() {
   const [emailMessage, setEmailMessage] = useState("");
   const [correoValidation, setCorreoValidation] = useState(false);
   const [contrasenaValidation, setContrasenaValidation] = useState(false);
-  const [registerMessage, setRegisterMessage] = useState("Registro exitoso");
+  const [registerMessage, setRegisterMessage] = useState("Registro fallido");
   const notify = () =>
     toast(registerMessage, { position: toast.POSITION.TOP_CENTER });
 
@@ -97,7 +97,7 @@ export default function RegisterPage() {
     async function fetchRegister() {
       try {
         await registerUser(newUser);
-        setRegisterMessage("Registro exitoso");
+        console.log("Usuario registrado");
         router.push(LOGIN_PATH);
       } catch (error) {
         console.error("Error al registrar usuario:", error);
@@ -203,9 +203,6 @@ export default function RegisterPage() {
               Iniciar sesión
             </Link>
           </section>
-          <button className="bg-transparent hover:bg-[#DDFFBB] rounded-md text-black font-semibold py-2 px-4 border border-green-700">
-            Registrarse
-          </button>
           <ToastContainer />
         </form>
       </section>
