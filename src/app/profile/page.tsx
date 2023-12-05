@@ -8,7 +8,7 @@ import IsAuth from "../components/IsAuth";
 import type { Customer } from "@/types";
 import { useAuth } from "../Context/AuthContext";
 import { KEYS_TO_EXCLUDE, FORMATED_KEYS } from "./consts";
-import { updateProfile } from "./helpers";
+// import { updateProfile } from "./helpers";
 
 type ProfileRequiredData = {
   name: string;
@@ -54,14 +54,14 @@ function ProfilePage(): JSX.Element {
     handleSetBaseUserData()
   );
 
-  const handleUpdateProfile = () => {
-    const newProfileData = updateProfile(
-      authUser as Customer,
-      profile,
-      authUser?.id as number
-    );
-    setAuthUserState(newProfileData);
-  };
+  // const handleUpdateProfile = () => {
+  //   const newProfileData = updateProfile(
+  //     authUser as Customer,
+  //     profile,
+  //     authUser?.id as number
+  //   );
+  //   setAuthUserState(newProfileData);
+  // };
 
   return (
     <section className="container mx-auto px-4 py-8 h-screen">
@@ -130,13 +130,13 @@ function ProfilePage(): JSX.Element {
                 ))}
             <div className="flex space-x-4 justify-end mt-10">
               <button
-                onClick={() =>
-                  updateProfile(
-                    authUser as Customer,
-                    profile,
-                    authUser?.id as number
-                  )
-                }
+                // onClick={() =>
+                //   updateProfile(
+                //     authUser as Customer,
+                //     profile,
+                //     authUser?.id as number
+                //   )
+                // }
                 className="btn"
               >
                 Guardar cambios

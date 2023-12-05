@@ -77,13 +77,13 @@ type Filters = {
 };
 
 type Sell ={
-  id: number;
+  id?: number;
   user_id: number;
   total_price: number;
   status: string;
-  created_at: string;
-  updated_at: string;
-  products: Product[];
+  created_at?: string;
+  updated_at?: string;
+  products?: CartProduct[];
 }
 
 export type {

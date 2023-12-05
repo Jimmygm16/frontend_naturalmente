@@ -55,7 +55,7 @@ export default function App() {
           textValue="Buys"
           className="flex flex-row items-center font-light hover:text-white hover:bg-color4 outline-none hover:rounded-md hover:transition-colors duration-200"
           onClick={() => {
-            router.push("/");
+            router.push("/profile/compras");
           }}
         >
           <LocalOfferIcon sx={{ fontSize: 35 }} />

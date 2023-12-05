@@ -2,21 +2,23 @@
 
 import { createContext, useContext } from "react";
 import useFetch from "@/hooks/useFetch";
-import { CartProduct } from "@/types";
+import { CartProduct, Sell } from "@/types";
 import { useAuth } from "./AuthContext";
 import {
   attachProductToCart,
   detachProductFromCart,
   updateProductQuantity,
 } from "@/services/shoppingCart";
+import { makeSell } from "@/services/Sells";
 
 type CartContextProps = {
   cartProducts: CartProduct[];
   isLoading: boolean;
   setCartProducts: (products: CartProduct[]) => void;
-  addProduct: (quantity: number, product_id: string) => void;
+  addProduct: (quantity: number, product_id: number) => void;
   removeProduct: (product: CartProduct) => void;
   updateQuantity: (quantity: number, product_id: number) => void;
+  handleBuyCart: (sell: Sell) => void;
 };
 
 const CartContext = createContext<CartContextProps | null>(null);
@@ -27,7 +29,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     `/users/${authUser?.id as number}/products`
   ) as [CartProduct[], boolean, (products: CartProduct[]) => void];
 
-  const addProduct = (quantity: number, product_id: string) => {
+  const addProduct = (quantity: number, product_id: number) => {
     async function addToCart() {
       try {
         const response =
@@ -73,6 +75,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } catch (error) {}
   };
 
+  const handleBuyCart = async (sell: Sell) => {
+    console.log(sell);
+    const newSell = await makeSell(sell);
+    return newSell;
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -82,6 +90,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         addProduct,
         removeProduct,
         updateQuantity,
+        handleBuyCart,
       }}
     >
       {children}
