@@ -27,7 +27,8 @@ export default function App() {
         className="bg-gray-100 px-2 py-1.5 rounded-lg shadow-lg text-xl"
       >
         <DropdownItem
-          key="new"
+          key="profile"
+          textValue="Profile"
           className="flex flex-row items-center font-light hover:text-white hover:bg-color4 outline-none hover:rounded-md hover:transition-colors duration-200"
         >
           <Person2Icon sx={{ fontSize: 35 }} />
@@ -36,7 +37,8 @@ export default function App() {
           </Link>
         </DropdownItem>
         <DropdownItem
-          key="copy"
+          key="cart"
+          textValue="Cart"
           className="flex flex-row items-center font-light hover:text-white hover:bg-color4 outline-none hover:rounded-md hover:transition-colors duration-200"
         >
           <LocalMallIcon sx={{ fontSize: 35 }} />
@@ -45,7 +47,8 @@ export default function App() {
           </Link>
         </DropdownItem>
         <DropdownItem
-          key="edit"
+          key="buys"
+          textValue="Buys"
           className="flex flex-row items-center font-light hover:text-white hover:bg-color4 outline-none hover:rounded-md hover:transition-colors duration-200"
         >
           <LocalOfferIcon sx={{ fontSize: 35 }} />
@@ -54,7 +57,8 @@ export default function App() {
           </Link>
         </DropdownItem>
         <DropdownItem
-          key="edit"
+          key="logout"
+          textValue="Logout"
           className="flex flex-row items-center font-light mt-2 border-gray-200 hover:text-white hover:bg-red-500 outline-none hover:rounded-md hover:transition-colors duration-200"
           onClick={logout}
         >
