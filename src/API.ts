@@ -7,10 +7,10 @@ const API = axios.create({
   baseURL: 'http://localhost:8000/api/v1',
 });
 
-API.interceptors.request.use((request) => {
-  console.log(request)
-  return request;
-})
+// API.interceptors.request.use((request) => {
+//   console.log(request)
+//   return request;
+// })
 
 API.interceptors.response.use((response) => {
   console.log(response.data);
