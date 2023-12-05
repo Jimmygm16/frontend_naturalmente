@@ -12,6 +12,7 @@ type AuthContextProps = {
   login: (user: AuthUser) => void;
   logout: () => void;
   redirectOnMissingAuth: () => void;
+  setAuthUserState: (user: Customer | null) => void;
 };
 
 const AuthContext = createContext<AuthContextProps | null>(null);
@@ -43,17 +44,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const login = async (user: AuthUser) => {
-    async function fetchUser() {
-      try {
-        await loginUser(user);
-        setIsAuth(true);
-        router.push("/profile");
-      } catch (error) {
-        console.error("Error al obtener usuario:", error);
-      }
+    try {
+      await loginUser(user);
+      await setFetched();
+      setIsAuth(true);
+    } catch (error) {
+      console.error("Error al obtener usuario:", error);
     }
-    fetchUser();
-    setFetched();
+
+    router.push("/profile");
   };
 
   const setFetched = async () => {
@@ -94,6 +93,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         login,
         logout,
         redirectOnMissingAuth,
+        setAuthUserState,
       }}
     >
       {children}
