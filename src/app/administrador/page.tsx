@@ -15,7 +15,11 @@ function page(): JSX.Element {
           img={productosImg}
           route="/administrador/productos"
         />
-        <RouteCard name="Pedidos" img={pedidosImg} route="/pedidos" />
+        <RouteCard
+          name="Pedidos"
+          img={pedidosImg}
+          route="/administrador/pedidos"
+        />
       </section>
     </>
   );

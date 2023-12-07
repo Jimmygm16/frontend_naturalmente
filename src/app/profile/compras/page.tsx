@@ -6,7 +6,7 @@ import useFetch from "@/hooks/useFetch";
 import { Sell } from "@/types";
 import BuyCard from "./components/BuyCard";
 import { useRouter } from "next/navigation";
-import BuySummary from "./components/BuySummary";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 export default function UserBuysPage() {
   const router = useRouter();
@@ -20,7 +20,7 @@ export default function UserBuysPage() {
       {isLoading && <Loading />}
       {
         <section>
-          <h2 className="font-light text-2xl py-3 px-4 mx-[20%] border-2 border-gray-300 bg-opacity-80 rounded-md shadow-sm">
+          <h2 className="font-serif text-2xl py-3 px-4 mx-[20%] border-b-2 border-gray-300 bg-opacity-80 rounded-md shadow-sm">
             TUS COMPRAS!
           </h2>
           <div className="flex flex-col gap-2 my-2 mx-[20%]">
@@ -33,6 +33,15 @@ export default function UserBuysPage() {
                 </span>
               </section>
             )}
+            <div className="m-4 ml-8">
+              <button
+                className="bg-white border-2 border-gray-300 text-xl text-black rounded-full py-3 px-6 hover:bg-gray-200 hover:cursor-pointer"
+                onClick={() => router.push("/productos")}
+              >
+                <ArrowBackIosIcon sx={{ fontSize: 20 }} />
+                Seguir comprando
+              </button>
+            </div>
           </div>
         </section>
       }

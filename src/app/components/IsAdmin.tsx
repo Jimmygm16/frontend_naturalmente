@@ -1,6 +1,6 @@
 "use client";
 import { redirect } from "next/navigation";
-import { useLayoutEffect, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { isAdmin } from "@/services/auth";
 
 export default function IsAuth(Component: React.ComponentType<JSX.Element>) {
@@ -23,9 +23,7 @@ export default function IsAuth(Component: React.ComponentType<JSX.Element>) {
       checkAdminStatus();
     }, []);
 
-    if (isAdminUser === null) {
-      return null;
-    }
+    if (isAdminUser === null) return null;
 
     if (!isAdminUser) {
       redirect("/");

@@ -4,8 +4,9 @@ import { Product } from "@/types";
 import ProductCrudCard from "@/app/components/ProductCrudCard";
 import FormCrudProduct from "@/app/components/FormCrudProduct";
 import { getProducts } from "@/services/products";
+import isAdmin from "@/app/components/IsAdmin";
 
-export default function Page() {
+function Page(): JSX.Element {
   const [products, setProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 3; // Número de productos por página
@@ -73,3 +74,5 @@ export default function Page() {
     </section>
   );
 }
+
+export default isAdmin(Page);

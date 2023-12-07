@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { CartProduct, Sell } from "@/types";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { getFinalPrice, sumAmountOfProducts, sumTotalPrice } from "../helpers";
 import { showCurrency } from "@/helpers";
 import { useAuth } from "../../Context/AuthContext";
 import { useCart } from "../../Context/CartContext";
+import ModalMessage from "@/app/components/ModalMessage";
 
 type CartSummaryProps = {
   products: CartProduct[];
@@ -12,6 +14,16 @@ type CartSummaryProps = {
 export default function CartSummary(props: CartSummaryProps): JSX.Element {
   const { authUser } = useAuth();
   const { cartProducts, handleBuyCart } = useCart();
+
+  let [open, setIsOpen] = useState(false);
+
+  async function openModal() {
+    setIsOpen(true);
+  }
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   const handleBuyProducts = () => {
     if (authUser) {
@@ -25,6 +37,11 @@ export default function CartSummary(props: CartSummaryProps): JSX.Element {
 
   return (
     <section className="col-span-1">
+      <ModalMessage
+        isOpen={open}
+        closeModal={closeModal}
+        message="Pedido realizado con éxito!"
+      />
       <div className="border-2 px-5 py-3 border-gray-300 rounded-lg">
         <details className="hover:cursor-pointer py-1 duration-700">
           <summary className="flex justify-between bg-inherit text-lg">
@@ -82,8 +99,11 @@ export default function CartSummary(props: CartSummaryProps): JSX.Element {
           </span>
         </div>
         <button
-          className="w-full flex items-center gap-2 justify-center text-md font-semibold text-white bg-color4 rounded-3xl py-3 mt-5"
-          onClick={() => handleBuyProducts()}
+          className="w-full flex items-center gap-2 justify-center text-md font-semibold text-white bg-green-500 hover:bg-green-600 rounded-3xl py-3 mt-5"
+          onClick={() => {
+            handleBuyProducts();
+            openModal();
+          }}
         >
           <ShoppingCartIcon sx={{ fontSize: 20 }} />
           Realizar pedido
