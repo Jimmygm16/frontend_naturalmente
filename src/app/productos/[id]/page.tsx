@@ -8,6 +8,7 @@ import Loading from "@/app/components/Loading";
 import { useAuth } from "@/app/Context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/app/Context/CartContext";
+import ModalMessage from "@/app/components/ModalMessage";
 
 export default function SingleProductPage({
   params,
@@ -21,6 +22,15 @@ export default function SingleProductPage({
   const [price, setPrice] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(1);
   const { authUser, isAuth } = useAuth();
+  let [open, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   const router = useRouter();
 
   useEffect(() => {
@@ -64,6 +74,11 @@ export default function SingleProductPage({
       {isLoading && <Loading />}
       {product && (
         <section className="h-screen grid grid-cols-2 py-3">
+          <ModalMessage
+            isOpen={open}
+            closeModal={closeModal}
+            message="Agregado al carrito con éxito"
+          />
           <section className="w-full"></section>
           <section className="flex flex-col w-[90%] mx-auto">
             <div className="font-semibold text-4xl py-6">
@@ -87,12 +102,14 @@ export default function SingleProductPage({
                 onClick={() => {
                   if (!isAuth) {
                     router.push("/login");
-                  } else addProduct(quantity, params.id);
+                  } else {
+                    addProduct(quantity, params.id);
+                    openModal();
+                  }
                 }}
               >
                 Agregar al carrito
               </button>
-              <button className="btn w-full bg-orange-300">Comprar</button>
             </div>
           </section>
         </section>

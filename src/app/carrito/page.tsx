@@ -1,5 +1,4 @@
 "use client";
-
 import { CartProduct } from "@/types";
 import { useRouter } from "next/navigation";
 import CartProductCard from "./components/CartProductCard";
@@ -49,7 +48,7 @@ function CartPage(): JSX.Element {
 
             <div className="flex flex-row justify-between my-4">
               <button
-                className="bg-white border-2 border-gray-300 text-xl text-black rounded-full py-3 px-6"
+                className="bg-white border-2 border-gray-300 text-xl text-black rounded-full py-3 px-6 hover:bg-gray-200 hover:cursor-pointer"
                 onClick={() => router.push("/productos")}
               >
                 <ArrowBackIosIcon sx={{ fontSize: 20 }} />

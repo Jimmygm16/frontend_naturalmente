@@ -145,7 +145,7 @@ function ProfilePage(): JSX.Element {
                 onClick={() => {
                   setProfile(handleSetBaseUserData);
                 }}
-                className="btn bg-red-500"
+                className="btn bg-red-500 hover:bg-red-700"
               >
                 Deshacer cambios
               </button>

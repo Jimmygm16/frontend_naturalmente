@@ -27,7 +27,7 @@
       @apply w-[95%] mx-auto overflow-hidden;
   }
   .btn{
-      @apply bg-color4 text-yellow-50 text-xl font-semibold block py-2 px-4 rounded-full min-w-fit;
+      @apply bg-green-500 hover:bg-green-600 text-yellow-50 text-xl font-semibold block py-2 px-4 rounded-full min-w-fit;
   }
 }
 

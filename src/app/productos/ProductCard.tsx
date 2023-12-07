@@ -4,6 +4,8 @@ import { Product } from "@/types";
 import { useRouter } from "next/navigation";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { showCurrency } from "../../helpers";
+import productoImg from "@/sources/producto-natural.png";
+import Image from "next/image";
 
 export default function ProductCard(props: {
   product: Product;
@@ -22,7 +24,9 @@ export default function ProductCard(props: {
       className="grid grid-cols-4 rounded-lg shadow-md bg-gray-100 hover:cursor-pointer hover:bg-gray-200"
       onClick={handleClickCard}
     >
-      <section className="col-span-1"></section>
+      <section className="flex col-span-1 justify-center items-center">
+        <Image src={productoImg} alt="producto" className="w-28 h-28" />
+      </section>
 
       <section className="p-5 col-span-3">
         <div className="flex flex-row justify-between items-center pb-4">
