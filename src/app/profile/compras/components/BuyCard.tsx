@@ -4,8 +4,8 @@ import { formatDateString, showCurrency } from "@/helpers";
 import { Sell } from "@/types";
 import { capitalize } from "@mui/material";
 import { useRouter } from "next/navigation";
-import ClearIcon from "@mui/icons-material/Clear";
 import BuySummary from "./BuySummary";
+import ModalCancelBuy from "./ModalCancelBuy";
 
 type BuyCardProps = {
   sell: Sell;
@@ -17,11 +17,6 @@ export default function BuyCard(props: BuyCardProps): JSX.Element {
   const handleClickCard = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     router.push(`/profile/compras/${props.sell.id}`);
-  };
-
-  const handleDeleteBuy = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    console.log("delete");
   };
 
   return (
@@ -37,14 +32,7 @@ export default function BuyCard(props: BuyCardProps): JSX.Element {
           <span className="text-lg font-light">
             {`${formatDateString(props.sell?.created_at as string)}`}
           </span>
-          {props.sell.status === "pending" && (
-            <button
-              className="flex items-center text-lg px-1 py-0.5 rounded-lg bg-gray-200 hover:bg-red-400 hover:text-white"
-              onClick={handleDeleteBuy}
-            >
-              <ClearIcon sx={{ fontSize: 30 }} />
-            </button>
-          )}
+          {props.sell.status === "pending" && <ModalCancelBuy />}
         </section>
       </section>
       {props.sell.products && <BuySummary products={props.sell.products} />}

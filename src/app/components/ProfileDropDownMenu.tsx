@@ -9,7 +9,6 @@ import {
   DropdownItem,
 } from "@nextui-org/dropdown";
 import { Button } from "@nextui-org/button";
-import Link from "next/link";
 import { useAuth } from "../Context/AuthContext";
 import { useRouter } from "next/navigation";
 
