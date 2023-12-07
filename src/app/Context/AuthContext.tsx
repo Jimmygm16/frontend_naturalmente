@@ -5,10 +5,13 @@ import { useState, useContext, createContext } from "react";
 import { getUser, loginUser, logoutUser } from "@/services/users";
 import { useRouter } from "next/navigation";
 import { checkTokenValidity } from "@/services/auth";
+import { isAdmin } from "@/services/auth";
 
 type AuthContextProps = {
   authUser: Customer | null;
   isAuth: boolean;
+  isAdmin: boolean;
+  isAdminLog: () => void;
   login: (user: AuthUser) => void;
   logout: () => void;
   redirectOnMissingAuth: () => void;

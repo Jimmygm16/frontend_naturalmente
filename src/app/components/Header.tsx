@@ -1,8 +1,12 @@
+// Header.tsx
+
 "use client";
 
 import Image from "next/image";
 import icon from "../../sources/natural-plus.svg";
 import Link from "next/link";
+import { isAdmin } from "@/services/auth";
+import { useEffect, useState } from "react";
 import {
   LOGIN_PATH,
   REGISTER_PATH,
@@ -17,7 +21,29 @@ import ProfileDropDownMenu from "./ProfileDropDownMenu";
 
 function Header(): JSX.Element {
   const { isAuth } = useAuth();
+  const [isAdminUser, setIsAdminUser] = useState<any | null>(null);
+  const [isLoading, setIsLoading] = useState(true); // Nuevo estado para controlar la carga
   const router = useRouter();
+
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      try {
+        const admin = await isAdmin();
+        setIsAdminUser(admin);
+        console.log(admin);
+      } catch (error) {
+        console.error("Error al verificar el estado de administrador:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAdminStatus();
+  }, []);
+
+  if (isLoading) {
+    return <></>;
+  }
 
   return (
     <header className="w-full bg-white shadow-lg border-gray-600">
@@ -40,11 +66,22 @@ function Header(): JSX.Element {
 
         <section className="flex flex-row gap-10">
           <div className="hidden lg:flex flex-grow justify-center items-center">
-            <ul className="flex gap-6 font-semibold text-xl font-mono text-gray-600">
-              <li>
-                <Link href={PRODUCTS_PATH}>Productos</Link>
-              </li>
-            </ul>
+            {isAdminUser !== null && isAdminUser ? (
+              <ul className="flex gap-6 font-semibold text-xl font-mono text-gray-600">
+                <li>
+                  <Link href={PRODUCTS_PATH}>Productos</Link>
+                </li>
+                <li>
+                  <Link href={"/administrador"}>Administrador</Link>
+                </li>
+              </ul>
+            ) : (
+              <ul className="flex gap-6 font-semibold text-xl font-mono text-gray-600">
+                <li>
+                  <Link href={PRODUCTS_PATH}>Productos</Link>
+                </li>
+              </ul>
+            )}
           </div>
 
           <div className="fixed inset-0 bg-gradient-to-b from-color1/70 to-white/70 translate-x-full peer-checked:translate-x-0 transition-transform">

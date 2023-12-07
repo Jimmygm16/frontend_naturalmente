@@ -3,8 +3,9 @@ import RouteCard from "@/app/components/RouteCard";
 import clientesImg from "@/sources/clientes.png";
 import productosImg from "@/sources/productos.png";
 import pedidosImg from "@/sources/pedidos.png";
+import isAdmin from "@/app/components/IsAdmin";
 
-export default function page() {
+function page(): JSX.Element {
   return (
     <>
       <section className="m-28 min-h-screen flex flex-col">
@@ -19,3 +20,5 @@ export default function page() {
     </>
   );
 }
+
+export default isAdmin(page);
