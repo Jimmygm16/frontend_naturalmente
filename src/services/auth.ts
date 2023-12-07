@@ -30,3 +30,13 @@ export const checkTokenValidity = () => {
     }
   })
 }
+
+export async function isAdmin(): Promise <boolean> {
+  try {
+    const response = await API.get('/isAdmin');
+    console.log(response.data);
+    return response.data["message"];
+  } catch(error){
+    throw error;
+  }
+}
