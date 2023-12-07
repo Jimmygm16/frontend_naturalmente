@@ -6,7 +6,7 @@ export default function ClientCard(props: {
   id: number;
   status: string;
   date: string;
-  total: number;
+  total: string;
 }) {
   return (
     <div

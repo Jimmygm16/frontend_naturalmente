@@ -6,12 +6,10 @@ import CartProductCard from "./components/CartProductCard";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Loading from "../components/Loading";
 import CartSummary from "./components/CartSummary";
-import { useAuth } from "../Context/AuthContext";
 import IsAuth from "../components/IsAuth";
 import { useCart } from "../Context/CartContext";
 
 function CartPage(): JSX.Element {
-  const { authUser } = useAuth();
   const { cartProducts, isLoading, setCartProducts } = useCart();
 
   const router = useRouter();

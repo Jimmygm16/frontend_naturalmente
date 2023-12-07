@@ -29,9 +29,9 @@ export default function Page(): JSX.Element {
         {sells.map((sell: Sell) => (
           <SellCard
             key={sell.id}
-            id={sell.id}
+            id={sell?.id as number}
             status={sell.status}
-            date={sell.created_at}
+            date={sell?.created_at as string}
             total={showCurrency(sell.total_price)}
           />
         ))}

@@ -1,13 +1,28 @@
-import { CartProduct } from "@/types";
+import { CartProduct, Sell } from "@/types";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { getFinalPrice, sumAmountOfProducts, sumTotalPrice } from "../helpers";
 import { showCurrency } from "@/helpers";
+import { useAuth } from "../../Context/AuthContext";
+import { useCart } from "../../Context/CartContext";
 
 type CartSummaryProps = {
   products: CartProduct[];
 };
 
 export default function CartSummary(props: CartSummaryProps): JSX.Element {
+  const { authUser } = useAuth();
+  const { cartProducts, handleBuyCart } = useCart();
+
+  const handleBuyProducts = () => {
+    if (authUser) {
+      handleBuyCart({
+        user_id: authUser.id,
+        status: "pending",
+        total_price: getFinalPrice(sumTotalPrice(cartProducts)),
+      } as Sell);
+    }
+  };
+
   return (
     <section className="col-span-1">
       <div className="border-2 px-5 py-3 border-gray-300 rounded-lg">
@@ -66,7 +81,10 @@ export default function CartSummary(props: CartSummaryProps): JSX.Element {
               " COP"}
           </span>
         </div>
-        <button className="w-full flex items-center gap-2 justify-center text-md font-semibold text-white bg-color4 rounded-3xl py-3 mt-5">
+        <button
+          className="w-full flex items-center gap-2 justify-center text-md font-semibold text-white bg-color4 rounded-3xl py-3 mt-5"
+          onClick={() => handleBuyProducts()}
+        >
           <ShoppingCartIcon sx={{ fontSize: 20 }} />
           Realizar pedido
         </button>

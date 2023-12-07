@@ -1,5 +1,5 @@
 import { UpdateProfileData, updateProfileData } from "@/services/profile";
-import { Customer } from "@/types";
+import { CartProduct, Customer } from "@/types";
 
 export type ProfileRequiredData = {
   name: string;
@@ -25,15 +25,29 @@ const getChangedFields = (originalData: Customer, newData: ProfileRequiredData):
   return changedFields as UpdateProfileData;
 }
 
-export const updateProfile = async (originalData: Customer, newData: ProfileRequiredData, user_id: number): Promise<Customer> => {
+// export const updateProfile = async (originalData: Customer, newData: ProfileRequiredData, user_id: number): Promise<Customer> => {
 
-  try {
-    await updateProfileData(newData, user_id)
-      .then((response) => {
-        return response
-      });
-  } catch (error) {
-    throw error;
-  }
+//   try {
+//     await updateProfileData(newData, user_id)
+//       .then((response) => {
+//         return response
+//       });
+//   } catch (error) {
+//     throw error;
+//   }
 
+// }
+
+export const sumTotalPrice = (products: CartProduct[]): number => {
+  if(!products) return 0;
+  return products.reduce((num,product) => {
+    return num + product.price * product.pivot.orderedQuantity;
+  }, 0);
+}
+
+export const countTotalProducts = (products: CartProduct[]): number => {
+  if(!products) return 0;
+  return products.reduce((num,product) => {
+    return num + product.pivot.orderedQuantity;
+  }, 0);
 }

@@ -13,3 +13,17 @@ export const showCurrency = (amount: number) => {
 
   return formattedAmount;
 }
+
+export function formatDateString(inputDate: string): string {
+  const dateObject = new Date(inputDate);
+  const options: Intl.DateTimeFormatOptions = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+  };
+
+  return dateObject.toLocaleString('es-ES', options);
+}
