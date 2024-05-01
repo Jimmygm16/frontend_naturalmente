@@ -75,4 +75,5 @@ function Page(): JSX.Element {
   );
 }
 
-export default isAdmin(Page);
+export default Page;
+// export default isAdmin(Page);

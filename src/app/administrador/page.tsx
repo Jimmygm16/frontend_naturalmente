@@ -24,5 +24,5 @@ function page(): JSX.Element {
     </>
   );
 }
-
-export default isAdmin(page);
+export default page;
+// export default isAdmin(page);

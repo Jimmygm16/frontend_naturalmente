@@ -4,7 +4,7 @@ import { request } from 'http';
 axios.defaults.withCredentials = true;
 
 const API = axios.create({
-  baseURL: 'http://localhost:8000/api/v1',
+  baseURL: 'http://192.168.0.24:8000/api/v1',
 });
 
 // API.interceptors.request.use((request) => {

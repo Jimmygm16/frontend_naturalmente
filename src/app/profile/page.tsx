@@ -157,4 +157,5 @@ function ProfilePage(): JSX.Element {
   );
 }
 
-export default IsAuth(ProfilePage);
+export default ProfilePage;
+// export default IsAuth(ProfilePage);
