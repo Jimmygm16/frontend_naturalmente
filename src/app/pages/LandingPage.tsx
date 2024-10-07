@@ -20,6 +20,10 @@ function LandingPage() {
                         <Image src={group} className="rounded-3xl w-64 mx-auto shadow-lg mt-6" alt="cargando" width={64} height={64}/>
                     </li>
                 </ul>
+                <button> Test software</button>
+                <div>Software</div>
+                <div>implementation</div>
+                <div>button</div>
             </section>
             <section className="mt-20 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 ">
                 <div className="producto p-6 shadow-lg rounded-full">
